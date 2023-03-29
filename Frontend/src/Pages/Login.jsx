@@ -29,30 +29,25 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
     const [password,setpassword] = useState("")
 
   const login = async () => {
-    // let data = await axios
-    //                   .get(`https://alok-verma-rct.onrender.com/userlogin`)
-    //                   .then((res)=>(res.data))
-    //                   .catch((err)=>console.log(err));
-    
-    // let a =  data?.filter((e)=>{
-    //   if(e.email===email && e.password==password){
-    //     return e;
-    //   }
-    // })
-
-    // if(a.length){
-    //   let id=a[0].id
-    //   let details = {
-    //     Auth:!a[0].Auth,
-    //   };
-    //   localStorage.setItem("id", id);
-    //   localStorage.setItem("Auth", JSON.stringify(details));
-
-    //   dispatch(fetchData(id,details));
-    // }else{
-    //   alert("Wrong Credentials");
-    // }
-    // return;
+   
+    const payload = {
+      
+      email,
+      
+      password,
+      
+   }  
+  
+   let res = await fetch("http://localhost:8080/user/login",{
+         method:'POST',
+         headers:{
+          "content-type":"application/json"
+         },
+         body:JSON.stringify(payload)
+   })
+      res = await res.json()
+      localStorage.setItem("token",res.token)
+    console.log(res)
   };
  
     // if(isAuth===true){
