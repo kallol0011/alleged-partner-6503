@@ -21,7 +21,7 @@ import {
   import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const [value, setValue] = useState('')
+   
  
     const [email,setemail] = useState('')
     const [password,setpassword] = useState("")
@@ -32,24 +32,31 @@ const Signup = () => {
     const postdetails=async ()=>{
      
       
-    //   const payload={
-    //     email,
-    //     password,
-    //     firstname,
-    //     lastname,
-    //     Auth:false,
-    //     user:value==="user"?true:false,
-    //     admin:value==="admin"?true:false
-    //   }
+      const payload={
+        email,
+        password,
+        firstname,
+        lastname,
+    
+    
+      }
 
-    //  try {
+     try {
       
-    //  let res = await axios.post(`https://alok-verma-rct.onrender.com/userlogin`,payload)
-    //  console.log(res.data)
+      let res = await fetch("http://localhost:8080/user/register",{
+       method:'POST',
+       headers:{
+        "content-type":"application/json"
+       },
+       body:JSON.stringify(payload)
+ })
+    res = await res.json()
+  console.log(res)
+   
 
-    //  } catch (error) {
-    //   console.log(error)
-    //  }
+     } catch (error) {
+      console.log(error)
+     }
 
     }
   
@@ -60,7 +67,7 @@ const Signup = () => {
     setfirstname('')
     setpassword('')
     setlastname('')
-    setValue('')
+    
 
     }
 
