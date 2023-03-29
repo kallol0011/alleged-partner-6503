@@ -18,6 +18,8 @@ const userSchema=mongoose.Schema({
         type:String,
         required:true
     }
+},{
+    versionKey:false
 })
 
 const UserModel=mongoose.model("user",userSchema)
