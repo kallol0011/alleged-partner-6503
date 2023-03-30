@@ -7,8 +7,8 @@ export default class ImgSlider extends Component {
     const settings = {
       dots: true,
       infinite: true,
-      slidesToShow: 9,
-   slidesToScroll: 9,
+      slidesToShow: 7,
+   slidesToScroll: 7,
       autoplay: true,
       speed: 500,
       autoplaySpeed: 4000,

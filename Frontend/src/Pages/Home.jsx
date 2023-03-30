@@ -18,6 +18,7 @@ import {
   HomeData,
   todayDeal,
 } from "../components/Data";
+import Footer from "../components/Footer";
 
 import ImgSlider from "../components/ImageSlider";
 
@@ -385,9 +386,9 @@ const Home = () => {
       </Box>
 
       {/* ///*************************************************** */}
-      {/* <Box>
+      <Box>
         <Footer/>
-      </Box> */}
+      </Box>
     </Box>
   );
 };
