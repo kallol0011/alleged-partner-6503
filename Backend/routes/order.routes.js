@@ -1,16 +1,21 @@
 const express=require("express")
 const jwt=require("jsonwebtoken")
 const {OrderModel}=require("../model/order.model")
+const {CartModel}=require("../model/cart.model")
 
 const orderRouter=express.Router()
 
 orderRouter.post("/add",async(req,res)=>{
     const token=req.headers.authorization;
     const decoded = jwt.verify(token, 'masai');
-    payload=req.body;
+    const payload=await CartModel.find({userID:decoded.userID});
+    //const payload=req.body;
     try{
         if(decoded){
-            //add array
+            for(let i=0; i<=payload.length-1; i++){
+                payload[i].time=new Date().toLocaleTimeString()
+                payload[i].date=new Date().toDateString()
+            }
             await OrderModel.insertMany(payload)
             res.status(200).send({msg:"product added in order successfully"})
         }else{

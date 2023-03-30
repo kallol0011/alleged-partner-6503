@@ -1,12 +1,14 @@
 const express=require("express")
 const {CartModel}=require("../model/cart.model")
+const {ProductModel}=require("../model/product.model")
 const jwt=require("jsonwebtoken")
 const cartRouter=express.Router()
 
-cartRouter.post("/add",async(req,res)=>{
+cartRouter.post("/add/:productID",async(req,res)=>{
     const token=req.headers.authorization;
     const decoded = jwt.verify(token, 'masai');
-    const payload=req.body;
+    const {productID}=req.params;
+    const payload=await ProductModel.findOne({_id:productID})
     let user=await CartModel.find()
     try{
         if(decoded){

@@ -12,7 +12,9 @@ const orderSchema=mongoose.Schema({
     delivery:String,
     view:String,
     category:String,
-    userID:String
+    userID:String,
+    time:String,
+    date:String
 },{
     versionKey:false
 })
