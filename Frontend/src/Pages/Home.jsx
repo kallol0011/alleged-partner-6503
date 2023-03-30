@@ -1,21 +1,34 @@
-import { Box, Button, Center, Flex, Heading, Image, Link, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Heading,
+  Image,
+  Link,
+  Text,
+} from "@chakra-ui/react";
 import React from "react";
 import AutoPlay from "../components/cardSLider";
-import { acc, decore, Furniture, game, HomeData, todayDeal } from "../components/Data";
+import {
+  acc,
+  decore,
+  Furniture,
+  game,
+  HomeData,
+  todayDeal,
+} from "../components/Data";
 
 import ImgSlider from "../components/ImageSlider";
 
 import Carousel from "../components/SimpleSlider";
 
 const Home = () => {
-
-
   return (
     <Box>
       <Box boxSize={"border-box"}>
         <Box pos={"relative"} mt={10}>
           <Carousel />
-
           <Box
             ml="2"
             mr="2"
@@ -100,13 +113,13 @@ const Home = () => {
         </Box>
       </Box>
 
-   {/*///////////////////////////////////////////////////////////////////  */}
+      {/*///////////////////////////////////////////////////////////////////  */}
       <Box>
         <Box ml="2" mr="2" bg="transparent">
           <Flex justifyContent={"center"} gap={"6"}>
             <Box w={"25%"} p={4} boxShadow="lg" bg="white" color={"black"}>
               <Heading pb={2} size="md">
-              Automotive essentials | Up to 60% off
+                Automotive essentials | Up to 60% off
               </Heading>
               <Box display="grid" gridTemplateColumns="repeat(2,1fr)" gap={4}>
                 <Box>
@@ -145,7 +158,7 @@ const Home = () => {
             </Box>
             <Box w={"25%"} p={4} boxShadow="lg" bg="white" color={"black"}>
               <Heading pb={2} size="md">
-              Up to 60% off | Professional tools, testing & more
+                Up to 60% off | Professional tools, testing & more
               </Heading>
               <Box display="grid" gridTemplateColumns="repeat(2,1fr)" gap={4}>
                 <Box>
@@ -184,7 +197,7 @@ const Home = () => {
             </Box>
             <Box w={"25%"} boxShadow="lg" bg="white " color={"black"} p={4}>
               <Heading pb={2} size={"md"}>
-              Up to 70% off | Clearance store
+                Up to 70% off | Clearance store
               </Heading>
               <Image
                 src={
@@ -194,7 +207,7 @@ const Home = () => {
             </Box>
             <Box w={"25%"} boxShadow="lg" bg="white " color={"black"} p={4}>
               <Heading pb={2} size={"md"}>
-              Sell on Amazon with 1-Click Launch Support
+                Sell on Amazon with 1-Click Launch Support
               </Heading>
               <Image
                 src={
@@ -203,48 +216,57 @@ const Home = () => {
               ></Image>
             </Box>
           </Flex>
-      </Box>
+        </Box>
       </Box>
       {/* ///*************************************************** */}
       <Box>
-        <AutoPlay items={todayDeal}/>
+        <AutoPlay items={todayDeal} />
       </Box>
-    {/* ///*************************************************** */}
+      {/* ///*************************************************** */}
 
       <Box>
-        <ImgSlider items={acc} title={"Best Sellers in Computers & Accessories"}/>
+        <ImgSlider
+          items={acc}
+          title={"Best Sellers in Computers & Accessories"}
+        />
       </Box>
- {/* ///*************************************************** */}
+      {/* ///*************************************************** */}
 
- <Box>
-        <ImgSlider items={Furniture} title={"Up to 60% off | Curated furniture picks for your home"}/>
+      <Box>
+        <ImgSlider
+          items={Furniture}
+          title={"Up to 60% off | Curated furniture picks for your home"}
+        />
       </Box>
- {/* ///*************************************************** */}
+      {/* ///*************************************************** */}
 
- <Box>
-        <ImgSlider items={HomeData} title={"Frequently repurchased in Home"}/>
-      </Box>
-
-  {/* ///*************************************************** */}
-
- <Box m={6}>
-    <Center>
-    <Image src="https://m.media-amazon.com/images/G/31/AMS/IN/970X250-_desktop_banner.jpg"/>
-    </Center>
+      <Box>
+        <ImgSlider items={HomeData} title={"Frequently repurchased in Home"} />
       </Box>
 
- {/* ///*************************************************** */}
+      {/* ///*************************************************** */}
 
- <Box>
-        <ImgSlider items={decore} title={"Up to 60% off | Home décor picks from local shops"}/>
+      <Box m={6}>
+        <Center>
+          <Image src="https://m.media-amazon.com/images/G/31/AMS/IN/970X250-_desktop_banner.jpg" />
+        </Center>
       </Box>
-{/* ///*************************************************** */}
-<Box>
+
+      {/* ///*************************************************** */}
+
+      <Box>
+        <ImgSlider
+          items={decore}
+          title={"Up to 60% off | Home décor picks from local shops"}
+        />
+      </Box>
+      {/* ///*************************************************** */}
+      <Box>
         <Box mt={6} bg="transparent">
           <Flex justifyContent={"center"} gap={"6"}>
-          <Box w={"25%"} boxShadow="lg" bg="white " color={"black"} p={4}>
+            <Box w={"25%"} boxShadow="lg" bg="white " color={"black"} p={4}>
               <Heading pb={2} size={"md"}>
-              Baby diapers & wipes at great prices
+                Baby diapers & wipes at great prices
               </Heading>
               <Image
                 src={
@@ -254,7 +276,7 @@ const Home = () => {
             </Box>
             <Box w={"25%"} p={4} boxShadow="lg" bg="white" color={"black"}>
               <Heading pb={2} size="md">
-              Automotive essentials | Up to 60% off
+                Automotive essentials | Up to 60% off
               </Heading>
               <Box display="grid" gridTemplateColumns="repeat(2,1fr)" gap={4}>
                 <Box>
@@ -271,8 +293,7 @@ const Home = () => {
                       "https://images-eu.ssl-images-amazon.com/images/G/31/img20/Events/Schoolfromhome/PCQC/Maternity_Sleep__Loungewear._SY116_CB667651395_.jpg"
                     }
                   ></Image>
-                  <Text>
-Maternity Sleep & Loungewear</Text>
+                  <Text>Maternity Sleep & Loungewear</Text>
                 </Box>
                 <Box>
                   <Image
@@ -294,7 +315,7 @@ Maternity Sleep & Loungewear</Text>
             </Box>
             <Box w={"25%"} p={4} boxShadow="lg" bg="white" color={"black"}>
               <Heading pb={2} size="md">
-              Up to 60% off | Professional tools, testing & more
+                Up to 60% off | Professional tools, testing & more
               </Heading>
               <Box display="grid" gridTemplateColumns="repeat(2,1fr)" gap={4}>
                 <Box>
@@ -333,7 +354,7 @@ Maternity Sleep & Loungewear</Text>
             </Box>
             <Box w={"25%"} boxShadow="lg" bg="white " color={"black"} p={4}>
               <Heading pb={2} size={"md"}>
-              Diapers & wipes | Starting ₹99
+                Diapers & wipes | Starting ₹99
               </Heading>
               <Image
                 src={
@@ -342,34 +363,28 @@ Maternity Sleep & Loungewear</Text>
               ></Image>
             </Box>
           </Flex>
+        </Box>
       </Box>
+
+      {/* ///*************************************************** */}
+
+      <Box>
+        <ImgSlider items={game} title={"Best Sellers in Toys & Games"} />
+      </Box>
+      {/* ///*************************************************** */}
+      <Box textAlign={"center"}>
+        <Center>
+          <Box width={"20%"}>
+            <Text>See personalized recommendations</Text>
+            <Text background={"yellow.300"}>Sign in</Text>
+            <Text>
+              New customer? <Link to="/signup">Start here</Link>
+            </Text>
+          </Box>
+        </Center>
       </Box>
 
-{/* ///*************************************************** */}
-
-<Box>
-        <ImgSlider items={game} title={"Best Sellers in Toys & Games"}/>
-      </Box>
-{/* ///*************************************************** */}
-<Box textAlign={"center"}>
-<Center>
-<Box width={"20%"}>
-    <Text>
-      See personalized recommendations
-    </Text>
-  <Text background={"yellow.300"}>
-    Sign in
-  </Text>
-    <Text>
-      New customer? <Link to="/signup">Start here</Link>
-    </Text>
-    
-</Box>
-</Center>
-</Box>
-
-
-{/* ///*************************************************** */}  
+      {/* ///*************************************************** */}
       {/* <Box>
         <Footer/>
       </Box> */}
