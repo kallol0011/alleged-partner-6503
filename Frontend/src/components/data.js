@@ -1,4 +1,5 @@
-[
+
+const data=[
     {
         "image": "https://m.media-amazon.com/images/I/517fYsmPMyL._AC_UL320_.jpg",
         "title": "Kalyan Jewellers Coin E-Gift Card - Flat 1% off - Redeemable at Jewellery",
@@ -36,3 +37,5 @@
         "category": "product"
     }
 ]
+
+module.exports=data
