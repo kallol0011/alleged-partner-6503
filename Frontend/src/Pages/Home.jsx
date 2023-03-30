@@ -375,7 +375,7 @@ const Home = () => {
       {/* ///*************************************************** */}
       <Box textAlign={"center"}>
         <Center>
-          <Box width={"20%"}>
+          <Box width={"20%"} p={10}>
             <Text>See personalized recommendations</Text>
             <Text background={"yellow.300"}>Sign in</Text>
             <Text>
