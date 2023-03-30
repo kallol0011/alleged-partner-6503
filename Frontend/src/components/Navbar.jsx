@@ -1,5 +1,8 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text,Icon } from "@chakra-ui/react";
+import {FaShoppingCart} from "react-icons/fa"
+
 import React from "react";
+import Dra from "./Dra";
 const Navbar = () => {
   return (
     <>
@@ -50,19 +53,19 @@ const Navbar = () => {
           </Box>
 
           <Box className="cart-container border-white">
-            <i className="fa-solid fa-cart-shopping"></i>
+            {/* <i className="fa-solid fa-cart-shopping"><FaShoppingCart/></i> */}
+            <Icon fontSize={"4xl"} as={FaShoppingCart}/>
             Cart
           </Box>
         </Box>
 
-       <Box pos={"relative"} zIndex='1500'>
+       <Box pos={"relative"} zIndex='1200'>
        <nav className="nav" >
-          <Box className="container container-nav">
+          <Box className="container container-nav" alignItems={"center"}>
             <ul>
               <li className="border-white" id="open-nav-sidebar">
                 <span className="open-nav-slider">
-                  <i className="fa-solid fa-bars"></i>
-                  All
+                  <Dra/>
                 </span>
               </li>
               <li className="border-white">
@@ -103,61 +106,7 @@ const Navbar = () => {
         </nav>
        </Box>
         {/* <!--sidebar navigation--> */}
-        {/* <Box
-          className="sidebar-container-navigation"
-          id="sidebar-container-navigation-id"
-        >
-          <Box className="sidebar-left-part">
-            <Box className="sidebar-top">
-              <i className="fa-solid fa-circle-user"></i>
-              <h2>
-                Hello, <span>sign in</span>
-              </h2>
-            </Box>
-            <Box className="sidebar-wrap">
-              <Box className="sidebar-item">
-                <h2>Trending</h2>
-                <Text>Best Sellers</Text>
-                <Text>New Releases</Text>
-                <Text>Movers and Shakers</Text>
-              </Box>
-              <Box className="sidebar-item">
-                <h2>Digital Content And Devices</h2>
-                <Text>Echo & Alexa</Text>
-                <Text>Fire TV</Text>
-                <Text>Kindle E-Readers & eBooks</Text>
-                <Text>Audible Audiobooks</Text>
-                <Text>Amazon Prime Video</Text>
-                <Text>Amazon Prime Music</Text>
-              </Box>
-              <Box className="sidebar-item">
-                <h2>Shop By Category</h2>
-                <Text>Mobiles, Computes</Text>
-                <Text>TV, Appliances, Electronic</Text>
-                <Text>Men's Fashion</Text>
-                <Text>Women's Fashion</Text>
-                <Text>See All</Text>
-              </Box>
-              <Box className="sidebar-item">
-                <h2>Programs & Features</h2>
-                <Text>Gift Cards & Mobile Recharges</Text>
-                <Text>Flight Tickets</Text>
-                <Text>#Foundlt-OnAmazon</Text>
-                <Text>Clearance store</Text>
-              </Box>
-              <Box className="sidebar-item">
-                <h2>Help & Settings</h2>
-                <Text>Your Account</Text>
-                <Text>Customer Service</Text>
-                <Text>Sign in</Text>
-              </Box>
-            </Box>
-          </Box>
-          <button id="sidebar-navigation-close">
-            <i className="fa-solid fa-xmark"></i>
-          </button>
-        </Box> */}
-      </Box>
+        </Box>
     </>
   );
 };
