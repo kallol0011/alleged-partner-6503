@@ -2,7 +2,7 @@ import { Box, Button, Center, Flex, Heading, Image, Link, Text } from "@chakra-u
 import React from "react";
 import AutoPlay from "../components/cardSLider";
 import { acc, decore, Furniture, game, HomeData, todayDeal } from "../components/Data";
-import Footer from "../components/Footer";
+
 import ImgSlider from "../components/ImageSlider";
 
 import Carousel from "../components/SimpleSlider";
@@ -370,9 +370,9 @@ Maternity Sleep & Loungewear</Text>
 
 
 {/* ///*************************************************** */}  
-      <Box>
+      {/* <Box>
         <Footer/>
-      </Box>
+      </Box> */}
     </Box>
   );
 };
