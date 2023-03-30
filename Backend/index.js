@@ -7,6 +7,7 @@ const {userRouter}=require("./routes/user.routes")
 const {cartRouter}=require("./routes/cart.routes")
 const {auth}=require("./middleware/auth.middleware")
 const {orderRouter}=require("./routes/order.routes")
+const {adminRouter}=require("./routes/admin.routes")
 const app=express()
 
 app.use(express.json())
@@ -14,6 +15,7 @@ app.use(cors())
 
 app.use("/user",userRouter)
 app.use("/product",productRouter)
+app.use("/admin",adminRouter)
 
 app.use(auth)
 app.use("/cart",cartRouter)

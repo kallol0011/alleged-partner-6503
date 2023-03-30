@@ -2,10 +2,12 @@ const express=require("express")
 const {ProductModel}=require("../model/product.model")
 const productRouter=express.Router()
 
+
 //get product for product page
 productRouter.get("/",async(req,res)=>{
+    const payload=req.body
     try{
-        let product=await ProductModel.find({category:"product"})
+        let product=await ProductModel.find(payload)
         res.status(200).send(product)
 
     }catch(err){
@@ -28,6 +30,19 @@ productRouter.get("/filter",async(req,res)=>{
     }catch(err){
         res.status(400).send({"msg":err.message})
     }
+})
+
+//singalproduct page
+productRouter.get("/singleproduct/:productID",async(req,res)=>{
+    const {productID}=req.params;
+    try{
+        const user=await ProductModel.findOne({_id:productID})
+        res.status(200).send(user)
+
+    }catch(err){
+        res.status(400).send({"msg":err.message})
+    }
+
 })
 
 
