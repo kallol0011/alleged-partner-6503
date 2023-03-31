@@ -1,0 +1,23 @@
+.logo {
+    height: 90%;
+    border-radius: 50%;
+  }
+  
+  .logoBox {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .show {
+    display: block;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .smlogout {
+    margin-right: 18px;
+    width: 80%;
+  }
