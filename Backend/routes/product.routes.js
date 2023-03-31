@@ -5,7 +5,7 @@ const productRouter=express.Router()
 
 //get product for product page
 productRouter.get("/",async(req,res)=>{
-    const payload=req.body
+    const payload=req.query
     try{
         let product=await ProductModel.find(payload)
         res.status(200).send(product)
