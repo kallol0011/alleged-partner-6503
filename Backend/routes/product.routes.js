@@ -45,5 +45,6 @@ productRouter.get("/singleproduct/:productID",async(req,res)=>{
 
 })
 
+//export module
 
 module.exports={productRouter}
