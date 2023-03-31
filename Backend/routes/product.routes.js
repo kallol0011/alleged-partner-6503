@@ -17,15 +17,35 @@ productRouter.get("/",async(req,res)=>{
 
 //search product product page
 productRouter.get("/filter",async(req,res)=>{
-    const {product}=req.query;
-    //console.log(product)
-    const queryObject={}
-
-    if(product){
-        queryObject.category={$regex: product, $options:"i"}
-    }
+    const {category,rating}=req.query;
+    const query={}
+    console.log(rating)
+    if (rating) {
+        if (Array.isArray(rating)) {
+          if (!query.$or) {
+            query.$or = [];
+          }
+          rating.forEach((el) => {
+       query.$or.push({ rating: { $eq: Number(el) } });
+          });
+        } else {
+          query.rating = { $regex: `.*${rating}.*`, $options: "$i" };
+        }
+      }
+      if (category) {
+        if (Array.isArray(category)) {
+          if (!query.$or) {
+            query.$or = [];
+          }
+          category.forEach((el) => {
+            query.$or.push({ category: { $regex: `.*${el}.*`, $options: "$i" } });
+          });
+        } else {
+          query.category = { $regex: `.*${category}.*`, $options: "$i" };
+        }
+      }
     try{
-        const data=await ProductModel.find(queryObject)
+        const data=await ProductModel.find(query)
         res.status(200).send(data)
     }catch(err){
         res.status(400).send({"msg":err.message})
