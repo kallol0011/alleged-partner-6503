@@ -3,6 +3,7 @@ import {FaShoppingCart} from "react-icons/fa"
 
 import React from "react";
 import Dra from "./Dra";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <>
@@ -58,7 +59,7 @@ const Navbar = () => {
             Cart
           </Box>
         </Box>
-
+{/* /////////////////////////////////////////////////////////////////////////////// */}
        <Box pos={"relative"} zIndex='1200'>
        <nav className="nav" >
           <Box className="container container-nav" alignItems={"center"}>
@@ -74,9 +75,11 @@ const Navbar = () => {
               <li className="border-white">
                 <a href="#">Today's Deals</a>
               </li>
-              <li className="border-white">
+             <Link to="/product">
+             <li className="border-white">
                 <a href="#">Mobiles</a>
               </li>
+             </Link>
               <li className="border-white">
                 <a href="#">Customer Service</a>
               </li>

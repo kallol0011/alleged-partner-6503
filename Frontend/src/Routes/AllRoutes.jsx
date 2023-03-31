@@ -4,7 +4,10 @@ import Checkout from '../Pages/Checkout';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
 import Signup from '../Pages/Signup';
+import Products from '../Pages/Products';
+
 import CartItem from '../Pages/Cart';
+
 
 const AllRoutes = () => {
     return (
@@ -14,6 +17,8 @@ const AllRoutes = () => {
             <Route path="/login" element={<Login></Login>} />
             <Route path="/cart" element={<CartItem></CartItem>} />
             <Route path="/checkout" element={<Checkout></Checkout>} />
+            <Route path="/product" element={<Products/>} />
+
         </Routes>
     );
 };
