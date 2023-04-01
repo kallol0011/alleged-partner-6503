@@ -5,6 +5,7 @@ import Home from '../Pages/Home';
 import Login from '../Pages/Login';
 import Signup from '../Pages/Signup';
 import Products from '../Pages/Products';
+import Orderpage from '../Pages/Orderpage';
 
 import CartItem from '../Pages/Cart';
 import ProductDetails from '../Pages/SingalProducts';
@@ -20,7 +21,11 @@ const AllRoutes = () => {
             <Route path="/cart" element={<CartItem></CartItem>} />
             <Route path="/checkout" element={<Checkout></Checkout>} />
             <Route path="/product" element={<Products/>} />
+
             <Route path="/product/:id" element={<SingalProducts/>} />
+
+            <Route path="/order" element={<Orderpage/>}/>
+
         </Routes>
     );
 };
