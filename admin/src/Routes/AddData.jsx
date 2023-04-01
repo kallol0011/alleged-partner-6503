@@ -18,12 +18,7 @@ import {
   Button,
   Image,
 } from "@chakra-ui/react";
-// import Sidebar from "../Components/Sidebar";
 
-// import { carState } from "../Redux/Cars/cars.reducer";
-// import { addCarDone, addCars } from "../Redux/Cars/cars.actions";
-// import { AppDispatch, RootState } from "../Redux/Store";
-// import { useAppDispatch } from "../Redux/app.hooks";
 import Sidebar from "../components/Sidebar";
 
 const AddProduct = () => {
@@ -33,21 +28,21 @@ const AddProduct = () => {
   const [categoty, setcategoty] = React.useState("");
   const [discount, setdiscount] = React.useState("");
 
-//   const dispatch = useAppDispatch();
-//   const state = useSelector((state ) => state.CarManager);
-//   const { add_success, add_error } = state;
+
+  const toast = useToast()
+
 
 const elments = [
-    "watch",
-    "mobile",
-    "kitchen",
-    "bag",
-    "earphone",
-    "laptop",
-    "mens",
-    "womens",
-    "cameras",
-  ];
+  "watch",
+  "mobile",
+  "kitchen",
+  "priduct",
+  "cream",
+  "laptop",
+  "clothes",
+  "shoe",
+  "jewellery",
+];
 
   const newProduct = {
     image: "https://m.media-amazon.com/images/I/61hVGtfIXGL._AC_UL320_.jpg",
@@ -65,29 +60,57 @@ const elments = [
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = { ...newProduct, price : +price,categoty, discount: discount, image, title };
-    // dispatch(addCars(data));
+    const data = { ...newProduct, price : price,categoty, discount: discount, image, title };
+    
     
     console.log(data);
+    const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NDI4MjFjZDY0OWVmOTdkMTJjOGVkZDQiLCJpYXQiOjE2ODAzNTE3MDZ9.VS0sgezYpPOGXtsf6XelmO1hZB4EWQUKV9YTnhURiCs"
+    localStorage.setItem("Authorization",JSON.stringify(token))
+    fetch(`http://localhost:8080/admin/add`,{
+      
+      method:"POST",
+      headers:{
+          "Content-Type":"application/json",
+          "token":localStorage.getItem("Authorization")
+      },
+      body:JSON.stringify(data)
+    }).then((res)=>res.json())
+    .then((res)=>{
+      console.log(res);
+      toast({
+        title: 'Account created.',
+        description: "We've created your account for you.",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
+      
+      
+    })
 
-    const headers = {
-      'Content-Type': 'application/json'
-    };
-    const url=`http://localhost:8080/products`
-    const options = {
-      method: 'POST',
-      url: url,
-      headers: headers,
-      data: JSON.stringify()
-    };
 
-    axios(options)
-  .then(response => console.log(response.data))
-  .catch(error => console.error(error));
+  //   const headers = {
+  //     'Content-Type': 'application/json'
+  //   };
+  //   const url=`http://localhost:8080/admin/add`
+  //   const options = {
+  //     method: 'POST',
+  //     url: url,
+  //     headers: headers,
+  //     data: JSON.stringify()
+  //   };
+
+  //   axios(options)
+  // .then(response => console.log(response.data))
+  // .catch(error => console.error(error));
     
 
 
   };
+
+  const submit=()=>{
+    
+}
 
   // const toast = useToast({
   //   title: `Car added successfully`,

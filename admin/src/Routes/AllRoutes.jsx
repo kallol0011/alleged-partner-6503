@@ -12,6 +12,7 @@ import Login from '../Pages/Login';
 import Profile from './Profile';
 import Feedback from './Feedback';
 import AddProduct from './AddData';
+import Register from '../Pages/Register';
 
 const AllRoutes = () => {
     return (
@@ -27,7 +28,7 @@ const AllRoutes = () => {
             <Route path="/orders" element={<Orders/>} />
             <Route path="/profile" element={<Profile/>} />
             <Route path="/feedback" element={<Feedback/>} />
-            <Route path="/logout" element={<Logout/>} />
+            <Route path="/register" element={<Register/>} />
         </Routes>
     );
 };

@@ -1,0 +1,13 @@
+
+admin  -- get 
+admin/add --add
+admin/delete/:productID  -- delete
+admin/update/:productID  -- update
+
+
+admin/getuser -- users
+admin/deleteuser/:userID -- users
+
+
+admin/getorder -- order
+admin/deleteorder/:orderID -- delete order

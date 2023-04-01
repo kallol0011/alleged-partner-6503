@@ -25,7 +25,7 @@ import Loader from '../components/Loader';
 import { useNavigate } from 'react-router-dom';
 
 const getData=()=>{
-   return fetch(`http://localhost:8080/products`)
+   return fetch(`http://localhost:8080/product`)
     .then((res)=>res.json())
 }
 
@@ -51,8 +51,10 @@ const Products = () => {
 
 
     useEffect(()=>{
-      getData().then((res)=>setProduct(res))
-      setLoading(false)
+      getData().then((res)=>{setProduct(res)
+      
+        setLoading(false)
+      })
     },[])
 
 
