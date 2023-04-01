@@ -8,6 +8,8 @@ import Products from '../Pages/Products';
 import Orderpage from '../Pages/Orderpage';
 
 import CartItem from '../Pages/Cart';
+import ProductDetails from '../Pages/SingalProducts';
+import SingalProducts from '../Pages/SingalProducts';
 
 
 const AllRoutes = () => {
@@ -19,7 +21,11 @@ const AllRoutes = () => {
             <Route path="/cart" element={<CartItem></CartItem>} />
             <Route path="/checkout" element={<Checkout></Checkout>} />
             <Route path="/product" element={<Products/>} />
+
+            <Route path="/product/:id" element={<SingalProducts/>} />
+
             <Route path="/order" element={<Orderpage/>}/>
+
         </Routes>
     );
 };
