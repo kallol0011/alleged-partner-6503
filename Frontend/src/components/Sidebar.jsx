@@ -11,6 +11,10 @@ export const Sidebar = () => {
   const initialValue=searchparam.getAll("category")
   const [categoryValue,setcategoryValue]=useState(initialValue||[])
 
+   const initialOrder=searchparam.getAll("sort","order")
+  const [categoryOrder,setcategoryOrder]=useState(initialOrder||"asc")
+
+
   const handleInput=(e)=>{
 let newcategory=[...category]
 let value=e.target.value
@@ -34,13 +38,22 @@ setcategory(newcategory)
     setcategoryValue(newcategoryValue)
       }
 
-const HandleSort=()=>{
-
+const HandleSort=(e)=>{
+  
+setcategoryOrder(e.target.value)
+ if(categoryOrder=="desc"){
+   setcategoryOrder("asc")
+ }else{
+  setcategoryOrder("desc")
+ }
+console.log(categoryOrder)
 }
   useEffect(()=>{
     let param={
       rating:category,
-      category:categoryValue
+      category:categoryValue,
+      sort:"price",
+      order:categoryOrder
     }
     setsearchparam(param)
   },[category,categoryValue])
@@ -80,10 +93,10 @@ const HandleSort=()=>{
       <br />
       <h3>Sort By Price</h3>
       <div>
-        <input data-testid="movie-sort-asc" type="radio" onChange={HandleSort} value="asc" />
+        <input data-testid="movie-sort-asc"  type="radio" name="sort"  onChange={HandleSort} value="asc" />
         <label>Ascending</label>
         <br />
-        <input data-testid="movie-sort-desc" type="radio" onChange={HandleSort} value="desc"/>
+        <input data-testid="movie-sort-desc" name="sort"  type="radio" onChange={HandleSort} value="desc"/>
         <label>Descending</label>
       </div>
     </DIV>

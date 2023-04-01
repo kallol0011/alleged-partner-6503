@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 const Products = () => {
   return (
     <>
-      <Box m={10} display={"flex"}>
+      <Box mt={12} display={"flex"} background={"blackAlpha.100"}>
        
           <Box w={"15%"} >
             <Sidebar />

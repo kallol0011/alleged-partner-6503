@@ -19,6 +19,4 @@ console.log(data)
            dispatch({type:GET_PRODUCT_FAILURE})
        })
     }
-    
-    
-    }
+}
