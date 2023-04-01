@@ -62,11 +62,11 @@ console.log(categoryOrder)
     <DIV>
       <h3>Filter by Rating</h3>
       <div>
-        <input data-testid="movie-filter-1" type="checkbox" onChange={handleInput} value="1" checked={category.includes("1")} />
+        {/* <input data-testid="movie-filter-1" type="checkbox" onChange={handleInput} value="1" checked={category.includes("1")} />
         <label>{"\u2605 \u2606 \u2606 \u2606 \u2606"}</label>
         <br />
         <input data-testid="movie-filter-2" type="checkbox"  onChange={handleInput} value="2" checked={category.includes("2")} />
-        <label>{"\u2605 \u2605 \u2606 \u2606 \u2606"}</label>
+        <label>{"\u2605 \u2605 \u2606 \u2606 \u2606"}</label> */}
         <br />
         <input data-testid="movie-filter-3" type="checkbox"  onChange={handleInput} value="3"  checked={category.includes("3")}/>
         <label>{"\u2605 \u2605 \u2605 \u2606 \u2606"}</label>

@@ -3,12 +3,12 @@ import React from 'react'
 
 const Footer = () => {
   return <>
-  <Box bg={"#37475a"} >
+  <Box bg={"#37475a"} color={"white"} >
 <Center p={"4"}>
     <Heading onClick={()=> window.scrollTo(0, 0)} size={"sm"}>Back to Top</Heading>
 </Center>
   </Box>
-<Box bg={"#232f3e"} p={10}>
+<Box bg={"#232f3e"} p={10} color={"white"}>
     <Box w={"60%"} display="flex" margin={"auto"} justifyContent="space-between" >
     <Box class="col-md-3"w="20%" lineHeight={"8"}>
           <Heading size={"md"}>Get to know us</Heading>
@@ -44,7 +44,7 @@ const Footer = () => {
     </Box>
 </Box>
 <Center>
-<Box bg={"#232f3e"} m={4} >
+<Box bg={"#232f3e"} color={"white"} m={4} >
             <p>
                <i class="far fa-copyright"></i> 1996-2020, Amazon.com Inc.
              </p>

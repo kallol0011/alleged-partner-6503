@@ -19,7 +19,7 @@ productRouter.get("/",async(req,res)=>{
 productRouter.get("/filter",async(req,res)=>{
     const {category,rating}=req.query;
     const query={}
-    console.log(rating)
+    // console.log(rating)
     if (rating) {
         if (Array.isArray(rating)) {
           if (!query.$or) {

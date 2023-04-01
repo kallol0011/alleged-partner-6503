@@ -115,7 +115,8 @@ const Home = () => {
       </Box>
 
       {/*///////////////////////////////////////////////////////////////////  */}
-      <Box>
+     <Box bg={"blackAlpha.300"}>
+     <Box>
         <Box ml="2" mr="2" bg="transparent">
           <Flex justifyContent={"center"} gap={"6"}>
             <Box w={"25%"} p={4} boxShadow="lg" bg="white" color={"black"}>
@@ -389,6 +390,8 @@ const Home = () => {
       <Box>
         <Footer/>
       </Box>
+
+     </Box>
     </Box>
   );
 };
