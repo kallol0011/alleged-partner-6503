@@ -19,7 +19,7 @@ const Sidebar = () => {
     return (
       <>
         {/* {!isAuth ? (
-          <Navigate to="/login" />
+          <Navigate to="/admin/login" />
          ) : ( */}
           <Box
             className="sidebar"
@@ -28,7 +28,7 @@ const Sidebar = () => {
             
             
           >
-            <Link to="/dashboard">
+            <Link to="/admin/dashboard">
               <Button className="link" variant={"outline"}>
                 <Flex width={"150px"}>
                   <HiOutlineChartSquareBar className="icon" />
@@ -37,7 +37,7 @@ const Sidebar = () => {
                 </Flex>
               </Button>
             </Link>
-            <Link to="/products">
+            <Link to="/admin/products">
               <Button className="link" variant={"outline"}>
                 <Flex width={"150px"}>
                   <BsBoxFill className="icon" />
@@ -47,7 +47,7 @@ const Sidebar = () => {
               </Button>
             </Link>
   
-            <Link to="/users">
+            <Link to="/admin/users">
               <Button className="link" variant={"outline"}>
                 <Flex width={"150px"}>
                   <FiUsers className="icon" />
@@ -56,7 +56,7 @@ const Sidebar = () => {
                 </Flex>
               </Button>
             </Link>
-            <Link to="/orders">
+            <Link to="/admin/orders">
               <Button className="link" variant={"outline"}>
                 <Flex width={"150px"}>
                   <CiMemoPad className="icon" />
@@ -65,7 +65,7 @@ const Sidebar = () => {
                 </Flex>
               </Button>
             </Link>
-            <Link to="/feedback">
+            <Link to="/admin/feedback">
               <Button className="link" variant={"outline"}>
                 <Flex width={"150px"}>
                   <MdFeedback className="icon" />
@@ -74,7 +74,7 @@ const Sidebar = () => {
                 </Flex>
               </Button>
             </Link>
-            <Link to="/profile">
+            <Link to="/admin/profile">
               <Button className="link" variant={"outline"}>
                 <Flex width={"150px"}>
                   <CgProfile className="icon" />

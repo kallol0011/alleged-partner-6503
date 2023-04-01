@@ -13,22 +13,24 @@ import Profile from './Profile';
 import Feedback from './Feedback';
 import AddProduct from './AddData';
 import Register from '../Pages/Register';
+import UpdateData from './UpdateData';
 
 const AllRoutes = () => {
     return (
         <Routes>
             {/* <Route path="/" element={<Home/>} /> */}
             {/* <Route path="/signup" element={<Signup></Signup>} /> */}
-            <Route path="/login" element={<Login/>} />
+            <Route path="admin/login" element={<Login/>} />
 
-            <Route path="/dashboard" element={<Dashboard/>} />
-            <Route path="/products" element={<Products/>} />
-            <Route path="/addproduct" element={<AddProduct/>} />
-            <Route path="/users" element={<Users/>} />
-            <Route path="/orders" element={<Orders/>} />
-            <Route path="/profile" element={<Profile/>} />
-            <Route path="/feedback" element={<Feedback/>} />
-            <Route path="/register" element={<Register/>} />
+            <Route path="admin/dashboard" element={<Dashboard/>} />
+            <Route path="admin/products" element={<Products/>} />
+            <Route path="admin/addproduct" element={<AddProduct/>} />
+            <Route path="admin/users" element={<Users/>} />
+            <Route path="admin/orders" element={<Orders/>} />
+            <Route path="admin/profile" element={<Profile/>} />
+            <Route path="admin/feedback" element={<Feedback/>} />
+            <Route path="admin/register" element={<Register/>} />
+            <Route path="admin/updateproduct/:id" element={<UpdateData/>} />
         </Routes>
     );
 };

@@ -3,6 +3,7 @@ import { Box, Flex, VStack , Image , FormControl, FormLabel, Input, Heading, But
 import Sidebar from '../components/Sidebar';
 import Loader from '../components/Loader';
 import amazon_logo from "../Images/Amazon_logo.png" 
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [loading,setLoading]=useState(false)
@@ -13,7 +14,7 @@ const Login = () => {
 
 
     const toast = useToast()
-
+    const navigate=useNavigate()
 
 
 
@@ -43,9 +44,12 @@ const Login = () => {
         description: "you have been successfully loged in to your amazon account",
         status: 'success',
         duration: 9000,
+        position: 'top',
         isClosable: true,
       })
       
+
+      navigate("admin/products")
       
     })
 

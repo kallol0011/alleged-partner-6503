@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Box, Flex, Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
+import { Box, Button, Flex, Image, Table, Tbody, Th, Thead, Tr, useToast } from '@chakra-ui/react';
 import Sidebar from '../components/Sidebar';
 import Loader from '../components/Loader';
 import "../Styles/Order.css"
+import { MdDeleteForever } from 'react-icons/md';
+import { AiFillCheckCircle } from 'react-icons/ai';
 
 
 
@@ -10,9 +12,18 @@ import "../Styles/Order.css"
 
 
 const getData=()=>{
-  return fetch(`http://localhost:8080/order`)
+  return fetch(`http://localhost:8080/admin/getorder`,{
+    method:"GET",
+    headers:{
+      "Content-Type":"application/json",
+      "Authorization":localStorage.getItem("token")
+    }
+  })
+  
   .then((res)=>res.json())
+
 }
+
 
 
 const Orders = () => {
@@ -22,13 +33,56 @@ const Orders = () => {
 
   const [loading,setLoading]=useState(true)
 
+
+  const toast = useToast()
+
   useEffect(()=>{
-    getData().then((res)=>setdata(res))
+    getData().then((res)=>{
+      setdata(res)
     setLoading(false)
-  },[])
+    })
+  },[data])
 
-console.log(data)
+// console.log(data)
 
+
+const OrderDone=()=>{
+  toast({
+    title: 'Oeder Done.',
+    description: " Order Conformation is Done ",
+    status: 'success',
+    duration: 9000,
+    position:"top",
+    isClosable: true,
+  })
+
+}
+
+
+const deleteProduct=(id)=>{
+  // 
+  console.log(id)
+  fetch(`http://localhost:8080/admin/deleteorder/${id}`,{
+    method:"DELETE",
+    headers:{
+      "Content-Type":"application/json",
+      "Authorization":localStorage.getItem("token")
+    }
+
+  })
+  .then((res)=>res.json())
+  .then((res)=>{console.log(res)
+    toast({
+      title: 'Delete.',
+      description: "Order is deleted successfully",
+      status: 'success',
+      duration: 9000,
+      position:"top",
+      isClosable: true,
+    })
+  })
+
+}
 
 
     return (
@@ -49,14 +103,16 @@ console.log(data)
           <Table variant="simple" width="100%">
             <Thead>
               <Tr>
-                <Th>Product</Th>
-                <Th>Product No.</Th>
-                <Th>UserID</Th>
-                <Th width="150px">Oeder Date</Th>
-                <Th width="150px">Delevary Date</Th>
-                <Th>Location</Th>
-                <Th>Oeder Id</Th>
+                <Th>image</Th>
+                <Th width="42vw" >title</Th>
+                <Th>category</Th>
+                <Th>User ID</Th>
                 <Th>price</Th>
+                <Th width="25vw">Oeder Date</Th>
+                <Th width="150px">Order time</Th>
+                <Th>discount</Th>
+                <Th  >rating</Th>
+                <Th  w={"1vw"} ></Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -65,14 +121,26 @@ console.log(data)
                   
                     return (
                       <Tr key={el._id} >
+                        <Th> <Image stc={el.image} alt={el.title} /> </Th>
                         <Th> {el.title} </Th>
+                        <Th> {el.category} </Th>
                         <Th> {el._id} </Th>
-                        <Th> {el._id} </Th>
-                        <Th>{el.order_date}</Th>
-                        <Th>{el.delevary_date}</Th>
-                        <Th>{el.location}</Th>
-                        <Th>{el.order_id}</Th>
                         <Th>${el.price}</Th>
+                        <Th>{el.date}</Th>
+                        <Th>{el.time}</Th>
+                        <Th>{el.discount}</Th>
+                        <Th  >{el.rating}⭐ </Th>
+                        <Th  >
+                          <Flex gap={"4%"} >
+                          <Button onClick={OrderDone} >
+                          <AiFillCheckCircle color="green"  />  
+                          </Button>
+                          
+                          <Button onClick={()=>deleteProduct(el._id)} >
+                          <MdDeleteForever color="green"  />      
+                          </Button>
+                          </Flex>
+                        </Th>
                       </Tr>
                     );
                   

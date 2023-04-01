@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Image } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import Loader from '../components/Loader';
 import Sidebar from '../components/Sidebar';
@@ -85,6 +85,7 @@ const elements = [
                 <Text className="title" color="green">
                   AVAILABLE PRODUCTS{" "}
                 </Text>
+                <Image src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9o22bmESU-hMYf09EVb30gvWpw_WJDbJer9hiVGq2XEzzRAlTo8E-3gpcQN6eJv9l45s&usqp=CAU"} alt={"chart"} />
                 <Flex flexWrap="wrap" justifyContent={"center"}>
                   
                   
@@ -130,6 +131,7 @@ const elements = [
                 <Text className="title" color="red">
                   OUT OF STOCK PRODUCTS
                 </Text>
+                <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7-HdXDPIAadWkVaWPwASZbO7MFvcyv-V46w&usqp=CAU" alt="image" />
                 <Flex flexWrap="wrap" justifyContent={"center"}>
                 {elements.map(function (el) {
                     return (
