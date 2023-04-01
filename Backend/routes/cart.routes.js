@@ -4,95 +4,80 @@ const {ProductModel}=require("../model/product.model")
 const jwt=require("jsonwebtoken")
 const cartRouter=express.Router()
 
-// cartRouter.post("/add/:productID",async(req,res)=>{
-//     const token=req.headers.authorization;
-//     const decoded = jwt.verify(token, 'masai');
-//     const {productID}=req.params;
-//     const payload=await ProductModel.findOne({_id:productID})
-//     let user=await CartModel.find()
-//     try{
-//         if(decoded){
-            
-//             let flag=false;
-//             for(let i=0; i<=user.length-1; i++){
-//                 if(user[i].title==payload.title){
-//                     flag=true
-//                 }
-//             }
-//             if(flag==true){
-//                 res.status(200).send({msg:"product already exist!"})
-//             }else{
-//                 let user=new CartModel(payload)
-//                 await user.save()
-//                 res.status(200).send({msg:"product added in a cart"})
-//             }
-            
-//         }else{
-//             res.status(400).send({msg:"please Login first!"})
-//         }
-//     }catch(err){
-//         res.status(400).send({msg:err})
-//     }
-// })
-
-
-//dummy
-cartRouter.post("/add",async(req,res)=>{
-    const token=req.headers.authorization;
-        const decoded = jwt.verify(token, 'masai');
-        //const {productID}=req.params;
-       // const payload=await ProductModel.findOne({_id:productID})
-       const payload=req.body;
-        let user=await CartModel.find()
-        try{
-            if(decoded){
-                
-                let flag=false;
-                for(let i=0; i<=user.length-1; i++){
-                    if(user[i].title==payload.title){
-                        flag=true
-                    }
-                }
-                if(flag==true){
-                    res.status(200).send({msg:"product already exist!"})
-                }else{
-                    let user=new CartModel(payload)
-                    await user.save()
-                    res.status(200).send({msg:"product added in a cart"})
-                }
-                
-            }else{
-                res.status(400).send({msg:"please Login first!"})
-            }
-        }catch(err){
-            res.status(400).send({msg:err})
-        }
-
-})
-
-//dummy
-cartRouter.get("/",async(req,res)=>{
+cartRouter.post("/add/:productID",async(req,res)=>{
     const token=req.headers.authorization;
     const decoded = jwt.verify(token, 'masai');
+    const {productID}=req.params;
+    //const payload=await ProductModel.findOne({_id:productID})
+    const payload=req.body;
+    let user=await CartModel.find()
     try{
         if(decoded){
-            let user=await CartModel.find()
-            res.status(200).send(user)
+            
+            let flag=false;
+            for(let i=0; i<=user.length-1; i++){
+                if(user[i].title==payload.title){
+                    flag=true
+                }
+            }
+            if(flag==true){
+                res.status(200).send({msg:"product already exist!"})
+            }else{
+                let user=new CartModel(payload)
+                await user.save()
+                res.status(200).send({msg:"product added in a cart"})
+            }
+            
         }else{
             res.status(400).send({msg:"please Login first!"})
         }
-
     }catch(err){
         res.status(400).send({msg:err})
     }
 })
 
+
+//dummy
+// cartRouter.post("/add",async(req,res)=>{
+//     const token=req.headers.authorization;
+//         const decoded = jwt.verify(token, 'masai');
+//         //const {productID}=req.params;
+//        // const payload=await ProductModel.findOne({_id:productID})
+//        const payload=req.body;
+//         let user=await CartModel.find()
+//         try{
+//             if(decoded){
+                
+//                 let flag=false;
+//                 for(let i=0; i<=user.length-1; i++){
+//                     if(user[i].title==payload.title){
+//                         flag=true
+//                     }
+//                 }
+//                 if(flag==true){
+//                     res.status(200).send({msg:"product already exist!"})
+//                 }else{
+//                     let user=new CartModel(payload)
+//                     await user.save()
+//                     res.status(200).send({msg:"product added in a cart"})
+//                 }
+                
+//             }else{
+//                 res.status(400).send({msg:"please Login first!"})
+//             }
+//         }catch(err){
+//             res.status(400).send({msg:err})
+//         }
+
+// })
+
+//dummy
 // cartRouter.get("/",async(req,res)=>{
 //     const token=req.headers.authorization;
 //     const decoded = jwt.verify(token, 'masai');
 //     try{
 //         if(decoded){
-//             let user=await CartModel.find({userID:decoded.userID})
+//             let user=await CartModel.find()
 //             res.status(200).send(user)
 //         }else{
 //             res.status(400).send({msg:"please Login first!"})
@@ -102,6 +87,22 @@ cartRouter.get("/",async(req,res)=>{
 //         res.status(400).send({msg:err})
 //     }
 // })
+
+cartRouter.get("/",async(req,res)=>{
+    const token=req.headers.authorization;
+    const decoded = jwt.verify(token, 'masai');
+    try{
+        if(decoded){
+            let user=await CartModel.find({userID:decoded.userID})
+            res.status(200).send(user)
+        }else{
+            res.status(400).send({msg:"please Login first!"})
+        }
+
+    }catch(err){
+        res.status(400).send({msg:err})
+    }
+})
 
 cartRouter.patch("/update/:cartID",async(req,res)=>{
     const token=req.headers.authorization
