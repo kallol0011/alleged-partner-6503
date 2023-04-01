@@ -8,7 +8,7 @@ import {
   Link,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import AutoPlay from "../components/cardSLider";
 import {
   acc,
@@ -25,6 +25,10 @@ import ImgSlider from "../components/ImageSlider";
 import Carousel from "../components/SimpleSlider";
 
 const Home = () => {
+  const [category,setCategory]=useState("product")
+
+  const token=localStorage.getItem("token")
+  
   return (
     <Box>
       <Box boxSize={"border-box"}>

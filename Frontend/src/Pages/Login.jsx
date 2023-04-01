@@ -19,7 +19,7 @@ import {
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
   
   export default function Login() {
-    // const navigate= useNavigate();
+    //const navigate= useNavigate();
     // const dispatch = useDispatch();
     // const {isAuth} = useSelector((store)=>store.auth)
     const location = useLocation();
@@ -27,6 +27,8 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
     const [email,setemail] = useState('')
     const [password,setpassword] = useState("")
+
+    const navigate=useNavigate()
 
   const login = async () => {
    
@@ -48,6 +50,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
       res = await res.json()
       localStorage.setItem("token",res.token)
     console.log(res)
+    navigate("/")
   };
  
     // if(isAuth===true){

@@ -1,10 +1,19 @@
 import { Box, Text,Icon } from "@chakra-ui/react";
 import {FaShoppingCart} from "react-icons/fa"
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Dra from "./Dra";
 import { Link } from "react-router-dom";
+import Logout from "./Logout";
+
 const Navbar = () => {
+  const [token,setToken]=useState("")
+  let tokenData=localStorage.getItem("token")
+  
+  useEffect(()=>{
+    setToken(tokenData)
+
+  },[token])
   return (
     <>
       <Box className="header" >
@@ -39,12 +48,20 @@ const Navbar = () => {
             </Box>
           </Box>
 
-          <Box className="login-container border-white">
+          {/* <Link to="/signup"><Box className="login-container border-white">
             <Text>
               Hello,<span>sign in</span>
             </Text>
             <Text className="account">Account & Lists</Text>
-          </Box>
+          </Box></Link> */}
+          {token? <Logout/>:
+          <Link to="/signup"><Box className="login-container border-white">
+          <Text>
+            Hello,<span>sign in</span>
+          </Text>
+          <Text className="account">Account & Lists</Text>
+        </Box></Link>
+          }
 
           <Box className="return-order-container">
             <Text>

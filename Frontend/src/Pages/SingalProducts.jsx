@@ -21,14 +21,17 @@ import {
   import { useEffect, useState } from "react";
   import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
   import { MdLocalShipping } from "react-icons/md";
-  import { useParams } from "react-router-dom";
+  import { useParams,useNavigate } from "react-router-dom";
   import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
   import { useDispatch } from "react-redux";
 import axios from "axios";
 import Footer from "../components/Footer";
+
   export default function SingalProducts() {
     const param = useParams();
     const [prod, setProd] = useState({});
+
+    const navigate=useNavigate()
    
     useEffect(()=>{
        fetchData(); 
@@ -40,6 +43,34 @@ import Footer from "../components/Footer";
            }).catch((err)=>{
           console.log("error")
        })
+    }
+
+    const addToCart=(id)=>{
+      // axios.post(`http://localhost:8080/cart/add/${id}`)
+      // .then((res)=>{
+      //   navigate("/cart")
+      //   console.log(res)
+      // })
+      // .catch((err)=>{
+      //   console.log(err)
+      // })
+      fetch(`http://localhost:8080/cart/add/${id}`,{
+        method:"POST",
+        body:JSON.stringify(prod),
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":`${localStorage.getItem("token")}`
+        }
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+        console.log(res)
+        navigate("/cart")
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
     }
     
     return <><Container maxW={"7xl"} mt={"20"} background={"blackAlpha.200"}>
@@ -206,8 +237,7 @@ import Footer from "../components/Footer";
             transform: "translateY(2px)",
             boxShadow: "lg",
           }}
-          onClick={() => {
-          }}
+          onClick={()=>addToCart(prod._id)}
         >
           Add to cart
         </Button>
