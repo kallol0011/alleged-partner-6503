@@ -1,13 +1,18 @@
 import { Box, Text,Icon } from "@chakra-ui/react";
 import {FaShoppingCart} from "react-icons/fa"
 
-import React, { useEffect, useState } from "react";
-import Dra from "./Dra";
 import { Link,useNavigate,useLocation } from "react-router-dom";
 import Logout from "./Logout";
+import React, { useEffect, useState } from "react";
+import Dra from "./Dra";
+import axios from "axios";
+import ProductCard from "./ProductCard";
 
 const Navbar = () => {
   //const [token,setToken]=useState(localStorage.getItem("token") || "")
+  const [search,setsearch]=useState("")
+  const [data,setdata]=useState([])
+ 
   const [token,setToken]=useState(false)
   const [category,setCategory]=useState("product")
 
@@ -15,8 +20,20 @@ const Navbar = () => {
   const location=useLocation()
   
   
-  
-  
+  const SearchData=(e)=>{
+    setsearch(e.target.value)
+    }
+    useEffect(()=>{
+      fetchData(search)
+    },[search])
+   const fetchData=async(data)=>{
+        axios.get(`http://localhost:8080/product/filter?q=${data}`).then((res)=>{
+          console.log("hkjhdkahkdhkahdkashk",res.data)
+          setdata(res.data)
+        }).catch((err)=>{
+          console.log(err)
+        })
+      }
   useEffect(()=>{
     let tokenData=localStorage.getItem("token") || ""
     if(tokenData){
@@ -72,14 +89,24 @@ const Navbar = () => {
             </Box>
           </Box>
 
-          <Box className="search-container">
-            <select className="search-select">
+           <Box pos='relative'>
+          <Box className="search-container" >
+           <select className="search-select">
               <option>All</option>
             </select>
-            <input type="text" className="search-input" />
+            <input onChange={SearchData} type="text" value={search} className="search-input" />
             <Box className="search-icon">
               <i className="fa-solid fa-magnifying-glass"></i>
             </Box>
+           </Box>
+         {search!==""&&data.length>0?<> <Box   >
+             <Box overflow={'scroll'} maxH={'30rem'} zIndex={'100000'} bg='white' pos='absolute' color='black' p='2' pt={"10"}>
+            {
+              data?.map((el)=>{
+                return <ProductCard {...el}/>
+              })
+            }
+           </Box></Box></>:""}
           </Box>
 
           <Box className="language-container border-white">

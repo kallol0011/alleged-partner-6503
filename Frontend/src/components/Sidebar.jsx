@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -10,9 +11,10 @@ export const Sidebar = () => {
   const [category,setcategory]=useState(initial||[])
   const initialValue=searchparam.getAll("category")
   const [categoryValue,setcategoryValue]=useState(initialValue||[])
-
-   const initialOrder=searchparam.getAll("sort","order")
-  const [categoryOrder,setcategoryOrder]=useState(initialOrder||"asc")
+const [sort,setsort]=useState(searchparam.get("sort")||"price")
+const [order,setOrder]=useState(searchparam.get("order")||"")
+  
+  
 
 
   const handleInput=(e)=>{
@@ -38,26 +40,30 @@ setcategory(newcategory)
     setcategoryValue(newcategoryValue)
       }
 
-const HandleSort=(e)=>{
-  
-setcategoryOrder(e.target.value)
- if(categoryOrder=="desc"){
-   setcategoryOrder("asc")
- }else{
-  setcategoryOrder("desc")
- }
-console.log(categoryOrder)
-}
-  useEffect(()=>{
-    let param={
-      rating:category,
-      category:categoryValue,
-      sort:"price",
-      order:categoryOrder
-    }
-    setsearchparam(param)
-  },[category,categoryValue])
+     
 
+
+const HandleSort=(e)=>{
+  setOrder(e.target.value)
+ 
+
+}
+// console.log("hhhghjh",searchparam.get("order"))
+  useEffect(()=>{
+   
+    setsearchparam(setQuert())
+  },[category,categoryValue,order])
+
+ const setQuert=()=>{
+  let param={
+    rating:category,
+    category:categoryValue,
+  }
+  if(order){
+   param={...param,sort:sort,order:order}
+  }
+  return param
+  }
   return (
     <DIV>
       <h3>Filter by Rating</h3>
@@ -104,6 +110,7 @@ console.log(categoryOrder)
 };
 
 const DIV = styled.div`
-  // width: 15%;
+  //  width: 15%;
+  // paddind:10px
   border-right: 1px solid gray;
 `;
