@@ -17,9 +17,18 @@ productRouter.get("/",async(req,res)=>{
 
 //search product product page
 productRouter.get("/filter",async(req,res)=>{
-    const {category,rating}=req.query;
+    const {category,rating,sort,order,q}=req.query;
     const query={}
-    // console.log(rating)
+    const SortData={}
+if(q){
+  query.title={$regex: `.*${q}.*`, $options: "$i"}
+}
+// console.log(query)
+    if(sort&&order){
+SortData[sort]=order
+
+    }
+
     if (rating) {
         if (Array.isArray(rating)) {
           if (!query.$or) {
@@ -45,7 +54,7 @@ productRouter.get("/filter",async(req,res)=>{
         }
       }
     try{
-        const data=await ProductModel.find(query)
+        const data=await ProductModel.find(query).sort(SortData)
         res.status(200).send(data)
     }catch(err){
         res.status(400).send({"msg":err.message})
@@ -65,6 +74,31 @@ productRouter.get("/singleproduct/:productID",async(req,res)=>{
 
 })
 
+// productRouter.get("/sortasc",async(req,res)=>{
+//   const payload=req.query
+//     try{
+//         let product=await ProductModel.find(payload)
+//         product=product.sort((a,b)=>a.price-b.price)
+//         res.status(200).send(product)
+
+//     }catch(err){
+//         res.status(400).send(err)
+//     }
+
+// })
+
+// productRouter.get("/sortdesc",async(req,res)=>{
+//   const payload=req.query
+//     try{
+//         let product=await ProductModel.find(payload)
+//         product=product.sort((a,b)=>b.price-a.price)
+//         res.status(200).send(product)
+
+//     }catch(err){
+//         res.status(400).send(err)
+//     }
+
+// })
 //export module
 
 module.exports={productRouter}
