@@ -140,7 +140,7 @@ const Navbar = () => {
 
          <Link to="/cart" > <Box className="cart-container border-white">
             {/* <i className="fa-solid fa-cart-shopping"><FaShoppingCart/></i> */}
-            <Icon fontSize={"4xl"} as={FaShoppingCart}/>
+            <Icon fontSize={"4xl"} as={ FaShoppingCart }/>
             Cart
           </Box>
            </Link>
