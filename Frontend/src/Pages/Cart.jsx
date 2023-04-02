@@ -25,27 +25,28 @@
  import { BsCart2, BsFillPersonFill, BsShieldFillCheck } from "react-icons/bs";
  import { MdOutlinePayments } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { fetchAllProducts } from "../Redux/CartReducer/action";
-import { removeitem } from "../Redux/CartReducer/action";
+//import { fetchAllProducts } from "../Redux/CartReducer/action";
+//import { removeitem } from "../Redux/CartReducer/action";
 // import { updateData } from "../Redux/CartReducer/action";
+import {allProducts} from "../Redux/CartReducer/action"
 import { useDispatch, useSelector } from 'react-redux';
-import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDataFromCart } from "../Redux/CartReducer/action"
+
+import { decreaseCartQuantity,deleteAllFromCart, increaseCartQuantity, removeDataFromCart } from "../Redux/CartReducer/action"
 
  const Cart=()=>{
     
    const dispatch = useDispatch();
    
-   const [CartData, setCartData] = useState([]);
+   //const [CartData, setCartData] = useState([]);
     
      const [show, setShow] = useState(false);
      const [TotalSum, setTotalSum] = useState(0);
      const cartData = useSelector(state => state.cartReducer.cartData);
   
     useEffect(() => {
-      dispatch(fetchAllProducts());
-      setCartData(cartData)
+      handleGetData()
     }, []);
-    
+
     
     useEffect(() => {
       let sum = 0;
@@ -56,21 +57,125 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
     }, [cartData,TotalSum]);
    
     
-
        
   
-    
-      
-
-      const handleDel=(id)=>{
-        dispatch(removeitem(id))
-        dispatch(fetchAllProducts());
+    const handleGetData=()=>{
+       fetch("http://localhost:8080/cart",{
+        method:"GET",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `${localStorage.getItem("token")}`
+        }
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+        dispatch(allProducts(res))
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     }
 
-    // const handleupdate=(id,quan)=>{
-    //   dispatch(updateData(id,quan))
-    //   dispatch(fetchAllProducts());
-    // }
+    const handleDeleteData=(id)=>{
+      fetch(`http://localhost:8080/cart/delete/${id}`,{
+        method:"DELETE",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `${localStorage.getItem("token")}`
+        }
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+        dispatch(removeDataFromCart())
+        handleGetData()
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+
+    const handleAddQuantity=(id,num)=>{
+      
+      fetch(`http://localhost:8080/cart/update/${id}`,{
+        method:"PATCH",
+        body:JSON.stringify({quantity:num+1}),
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `${localStorage.getItem("token")}`
+        }
+
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+         dispatch(increaseCartQuantity())
+         handleGetData()
+
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
+    }
+      
+    const handleSubQuantity=(id,num)=>{
+      
+      fetch(`http://localhost:8080/cart/update/${id}`,{
+        method:"PATCH",
+        body:JSON.stringify({quantity:num-1}),
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `${localStorage.getItem("token")}`
+        }
+
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+         dispatch(decreaseCartQuantity())
+         handleGetData()
+
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
+    }
+
+    const handleAddOrder=()=>{
+      fetch("http://localhost:8080/order/add",{
+        method:"POST",
+        body:JSON.stringify(cartData),
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `${localStorage.getItem("token")}`
+        }
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+        console.log(res)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
+      fetch(`http://localhost:8080/cart/deleteallcart`,{
+        method:"DELETE",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `${localStorage.getItem("token")}`
+        }
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+        dispatch(deleteAllFromCart())
+        handleGetData()
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
+      
+    }
+
     
       
     return(
@@ -113,7 +218,7 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
                               <button
                                 className="add-reduce-btn"
                                
-                                onClick={ () => dispatch(decreaseCartQuantity(item._id))}
+                                onClick={() =>handleSubQuantity(item._id,item.quantity)}
                                 // onClick={handleupdate(item._id,item.quantity)}
                                 disabled={item.quantity <= 1}
                               >
@@ -128,7 +233,7 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
                                 //     1
                                 //   )
                                 // }
-                                onClick={ () => dispatch(increaseCartQuantity(item._id)) }
+                                onClick={()=>handleAddQuantity(item._id,item.quantity)}
 
                               >
                                 +
@@ -153,7 +258,7 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
                             variant={"outline"}
                             // onClick={() => removeitem(item._id)}
                             // onClick={ () => dispatch(removeDataFromCart(item._id)) }
-                            onClick={()=>handleDel(item._id)} 
+                            onClick={()=>handleDeleteData(item._id)} 
                           >
                             Remove Item
                           </Button>
@@ -203,7 +308,7 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
                 </Box>
                 <Box textAlign={"left"} m="20px">
                   <Link to={"/checkout"}>
-                    <Button  fontSize={"20px"} p="30px 50px" colorScheme={"red"}>
+                    <Button  fontSize={"20px"} p="30px 50px" colorScheme={"red"} onClick={handleAddOrder}>
                       PROCEED TO PAY Rs. {TotalSum}
                     </Button>
                   </Link>

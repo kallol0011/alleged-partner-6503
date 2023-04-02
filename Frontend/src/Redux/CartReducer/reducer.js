@@ -28,8 +28,8 @@ export const reducer = (state = initialState, { type, payload }) => {
         case INCREASE_CART_QUANTITY: {
             return {
                 ...state,
-                cartData: state.cartData.map((item) => item._id === payload ? { ...item, quantity: item.quantity + 1 } : item
-                )
+               // cartData: state.cartData.map((item) => item._id === payload ? { ...item, quantity: item.quantity + 1 } : item
+                //)
             };
         };
 
@@ -37,8 +37,8 @@ export const reducer = (state = initialState, { type, payload }) => {
         case DECREASE_CART_QUANTITY: {
             return {
                 ...state,
-                cartData: state.cartData.map((item) => item._id === payload ? { ...item, quantity: item.quantity - 1 } : item
-                )
+                //cartData: state.cartData.map((item) => item._id === payload ? { ...item, quantity: item.quantity - 1 } : item
+                //)
             };
         };
 
@@ -55,7 +55,7 @@ export const reducer = (state = initialState, { type, payload }) => {
         case REMOVE_ALL_FROM_CART: {
             return {
                 ...state,
-                cartData: []
+                //cartData: []
 
             };
         }

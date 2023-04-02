@@ -19,34 +19,25 @@ export const addToCart = (data) => ({
 });
 
         //* increase quantity
-export const increaseCartQuantity = (id) => ({
-    type: INCREASE_CART_QUANTITY,
-    payload: id
+export const increaseCartQuantity = () => ({
+    type: INCREASE_CART_QUANTITY
+
 });
 
         //* decrease quantity
-export const decreaseCartQuantity = (id) => ({
+export const decreaseCartQuantity = () => ({
     type: DECREASE_CART_QUANTITY,
-    payload: id
+    
 });
 
-
-
-// export const decreaseCartQuantity = () => ({
-//     type: DECREASE_CART_QUANTITY,
-//     // payload: id
-// });
 
         //* remove item from cart
 export const removeDataFromCart = () => ({
     type: REMOVE_DATA_FROM_CART,
-    // payload: id
+    
 });
 
-// export const removeDataFromCart = (id) => ({
-//     type: REMOVE_DATA_FROM_CART,
-//     payload: id
-// });
+
 
         //* remove All item from cart
 export const deleteAllFromCart = () => ({
@@ -54,54 +45,4 @@ export const deleteAllFromCart = () => ({
 });
 
 
-        //* fetchall products 
-export const fetchAllProducts = () => {
-    return async (dispatch) => {
-        let res = await fetch("http://localhost:8080/cart",{
-            headers:{
-                "Authorization": `${localStorage.getItem("token")}`
-              }
-        });
-        let data = await res.json();
-          console.log('data', data)
-        data && dispatch(allProducts(data));
-    };
-
-    
-};
-
-
-
-  export const removeitem=(id)=> async(dispatch)=>{
-      let res = await fetch(`http://localhost:8080/cart/delete/${id}`,{
-          method:"DELETE",
-          headers:{
-              "Authorization":`${localStorage.getItem("token")}`
-            }
-        })
-        
-        res = await res.json()
-        dispatch(removeDataFromCart())
-       
-      }
-
-
-    //   export const updateData= (id,quan)=> async (dispatch)=>{
-  
-     
-    //   console.log(x)
-    //     let res = await fetch(`http://localhost:8080/cart/update/${id}`,{
-    //       method:"PATCH",
-    //       body:JSON.stringify({
-    //         quantity:quan-1
-    //       }),
-    //       headers:{
-    //         "Authorization":`${localStorage.getItem("token")}`
-    //       }
-    //     })
-
-    //     res = await res.json()
-    //     dispatch(decreaseCartQuantity())
-    
-    
-    // }
+ 

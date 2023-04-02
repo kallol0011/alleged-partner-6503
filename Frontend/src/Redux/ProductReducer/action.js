@@ -1,7 +1,11 @@
 import { GET_PRODUCT_FAILURE, GET_PRODUCT_REQUEST, GET_PRODUCT_SUCCESS } from "./actionType"
 import axios from "axios"
 
+
+
+
 export const getProducta=(data)=>(dispatch)=>{
+    
     dispatch({type:GET_PRODUCT_REQUEST})
 console.log(data)
     if(data?.rating?.length<=0||data?.category?.length<=0){
