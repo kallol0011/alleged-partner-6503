@@ -3,6 +3,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import Sidebar from '../components/Sidebar';
 import Loader from '../components/Loader';
 import "../Styles/Users.css"
+import { Helmet } from 'react-helmet';
 import {
   
   Text,
@@ -44,7 +45,9 @@ console.log(data)
 
     return (
       <Flex marginTop="60px" className='mainbox' >
-            
+            <Helmet>
+        <title> Users </title>
+      </Helmet>
       <Box>
         <Sidebar />
       </Box>

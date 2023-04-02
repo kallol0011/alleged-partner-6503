@@ -25,7 +25,7 @@ import { BiSort } from "react-icons/bi";
 import { RxDotFilled } from "react-icons/rx";
 import Loader from '../components/Loader';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { Helmet } from 'react-helmet';
 
 
 const baseUrl=`https://strange-crown-worm.cyclic.app`
@@ -112,6 +112,9 @@ const Products = () => {
 
     return (
         <Flex marginTop={"60px"} className="mainbox" >
+          <Helmet>
+        <title> Products </title>
+      </Helmet>
       <Box   >
         <Sidebar />
       </Box>

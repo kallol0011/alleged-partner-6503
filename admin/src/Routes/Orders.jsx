@@ -5,7 +5,7 @@ import Loader from '../components/Loader';
 import "../Styles/Order.css"
 import { MdDeleteForever } from 'react-icons/md';
 import { AiFillCheckCircle } from 'react-icons/ai';
-
+import { Helmet } from 'react-helmet';
 
 
 
@@ -87,7 +87,9 @@ const deleteProduct=(id)=>{
 
     return (
       <Flex marginTop="60px" className='mainbox' >
-            
+            <Helmet>
+        <title> Orders </title>
+      </Helmet>
       <Box>
         <Sidebar />
       </Box>

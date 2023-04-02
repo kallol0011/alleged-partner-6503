@@ -4,7 +4,7 @@ import Loader from '../components/Loader';
 import Sidebar from '../components/Sidebar';
 import {BsBox2Fill} from "react-icons/bs"
 import "../Styles/Dashboard.css"
-
+import { Helmet } from 'react-helmet';
 import {
   
 
@@ -44,6 +44,8 @@ const Dashboard = () => {
   const [loading,setLoading]=useState(true)
   
   const [data, setdata] = useState([])
+
+      
 
 
   useEffect(()=>{
@@ -85,6 +87,9 @@ const elements = [
 
     return (
         <Flex marginTop="60px" className='mainbox' >
+          <Helmet>
+        <title>Admin Dashboard </title>
+      </Helmet>
             
       <Box>
         <Sidebar />

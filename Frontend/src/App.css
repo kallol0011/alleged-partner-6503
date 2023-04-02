@@ -89,10 +89,11 @@ body {
 
 /***search-container****/
 .search-container {
-  background-color: red;
+  /* background-color: red; */
   margin-left: 25px;
   width: 640px;
   display: flex;
+  margin-left: 6vw;
   height: 40px;
   justify-content: space-between;
   border-radius: 3px;
@@ -101,12 +102,15 @@ body {
 
 .search-container:hover {
   outline: 3px solid orange;
+  background-color: aqua;
+  
 }
 
 .search-select {
   width: 60px;
   border: none;
-  background-color: rgb(230, 227, 227);
+  background-color: rgb(239, 239, 239);
+  color: #000;
 }
 
 .search-input {
@@ -116,6 +120,10 @@ body {
   outline: none;
   padding: 3px;
   font-size: 1.1rem;
+  background-color: rgb(210, 210, 210);
+  color: black;
+  font-size: 21px;
+  padding-left: 0.4vw;
 }
 
 .search-icon {

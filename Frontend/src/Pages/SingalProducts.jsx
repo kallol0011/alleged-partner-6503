@@ -73,36 +73,31 @@ import Footer from "../components/Footer";
 
     }
     
-    return <><Container maxW={"7xl"} mt={"20"} background={"blackAlpha.200"}>
-    <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={{ base: 8, md: 10 }}>
-      <Flex>
+    return <><Container maxH={"2xl"} maxW={"7xl"} mt={"20"} background={"blackAlpha.100"}  > 
+     <SimpleGrid  columns={{ base: 1, lg: 2 }} spacing={{ base: 8, md: 10 }}>
+      <Flex  >
         <Image
           rounded={"md"}
+          mt={"-6vh"}
           alt={"product image"}
           src={prod?.image}
           fit={"contain"}
           align={"center"}
-          w={"100%"}
+          w={"83%"}
+          borderRadius={"12%"}
         />
       </Flex>
       <Stack spacing={{ base: 6, md: 10 }}>
         <Box as={"header"}>
-          <Heading  pt={"5"}
+          <Heading  pt={"15"}
             lineHeight={1.1}
             fontWeight={600}
             fontSize={{ base: "2xl", sm: "4xl", lg: "2xl" }}
           >
             {prod?.title}
           </Heading>
-          <Text
-            color={useColorModeValue("gray.900", "gray.400")}
-            fontWeight={300}
-            fontSize={"2xl"}
-          >
-            ${prod?.price}.00 USD
-          </Text>
-        </Box>
-        <Flex gap={1}>
+
+          <Flex gap={1}  >
           {prod?.rating &&
             Array(5)
               .fill("")
@@ -115,7 +110,7 @@ import Footer from "../components/Footer";
                       color={"yellow.500"}
                     />
                   );
-                } else if (i + 1 == Math.floor(prod.rating)) {
+                } else if (i + 1 === Math.floor(prod.rating)) {
                   return (
                     <Icon
                       key={Math.random() * 100 + 13}
@@ -134,8 +129,24 @@ import Footer from "../components/Footer";
                 }
               })}
         </Flex>
+
+          <Text
+            color={useColorModeValue("gray.900", "gray.400")}
+            fontWeight={600}
+            fontSize={"2xl"}
+            mt={"2vh"}
+            // bg={"green.100"}
+            
+          >
+            ₹{prod?.price}.00 
+          </Text>
+        </Box>
+        
         <Stack
-          spacing={{ base: 4, sm: 6 }}
+        // bg={"green.100"}
+         
+          // spacing={{ base: 4, sm: 6 }}
+
           direction={"column"}
           divider={
             <StackDivider

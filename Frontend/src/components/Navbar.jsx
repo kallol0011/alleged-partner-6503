@@ -94,13 +94,13 @@ const Navbar = () => {
            <select className="search-select">
               <option>All</option>
             </select>
-            <input onChange={SearchData} type="text" value={search} className="search-input" />
+            <input onChange={SearchData} type="text" color={"black"} value={search}  className="search-input" />
             <Box className="search-icon">
               <i className="fa-solid fa-magnifying-glass"></i>
             </Box>
            </Box>
          {search!==""&&data.length>0?<> <Box   >
-             <Box overflow={'scroll'} maxH={'30rem'} zIndex={'100000'} bg='white' pos='absolute' color='black' p='2' pt={"10"}>
+             <Box overflow={'scroll'} maxH={'71vh'} zIndex={'100000'} bg='white' pos='absolute' borderRadius={"14px"} color='black' p='2' pt={"10"}>
             {
               data?.map((el)=>{
                 return <ProductCard {...el}/>
@@ -127,7 +127,7 @@ const Navbar = () => {
           <Text>
             Hello,<span>sign in</span>
           </Text>
-          <Text className="account">Account & Lists</Text>
+          <Text  className="account">Account & Lists</Text>
         </Box></Link>
           }
 
@@ -138,11 +138,12 @@ const Navbar = () => {
             </Text>
           </Box>
 
-          <Box className="cart-container border-white">
+         <Link to="/cart" > <Box className="cart-container border-white">
             {/* <i className="fa-solid fa-cart-shopping"><FaShoppingCart/></i> */}
             <Icon fontSize={"4xl"} as={FaShoppingCart}/>
             Cart
           </Box>
+           </Link>
         </Box>
 {/* /////////////////////////////////////////////////////////////////////////////// */}
        <Box pos={"relative"} zIndex='1200'>

@@ -1,4 +1,4 @@
-import { Badge, Box, Flex, Heading, Icon, Image, Text } from '@chakra-ui/react'
+import { Badge, Box, Button, Flex, Heading, Icon, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 import {AiFillEye} from "react-icons/ai"
 import { Link } from 'react-router-dom'
@@ -9,7 +9,7 @@ const ProductCard = ({category,discount,image,offer,price,rating,title,view,_id}
    <Image w={"60%"} src={image}  margin={"auto"} />
    </Box>
    <Box bg={"blackAlpha.50"} p={"4"} w={"60%"} lineHeight={"5"} >
-     <Heading pt={"2"} size={"md"}>{title}</Heading>
+     <Heading mb={"2"} size={"sm"}>{title}</Heading>
      <Badge  pt={"2"}  fontSize={"md"} colorScheme='red'>{price}{discount}</Badge>
      <Badge pt={"2"} fontSize={"md"} colorScheme='blue'>{offer}</Badge>
    <Flex pt={"2"} alignItems={"center"}>
@@ -18,7 +18,7 @@ const ProductCard = ({category,discount,image,offer,price,rating,title,view,_id}
    </Flex>
    <label >{"\u2605 \u2606 \u2606 \u2606 \u2606"}{`(${rating})`}</label>
    
-   <Link to={`/product/${_id}`}><Text pt={"10"} fontSize={"xl"} color={"blue"}>View more </Text></Link>
+   <Link to={`/product/${_id}`}><Text pt={"5"} fontSize={"xl"} color={"white"}> <Button bg={"blue.400"} > View more </Button>  </Text></Link>
    </Box>
   </Flex>
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Flex, VStack , Image , FormControl, FormLabel, Input, Heading, Button} from '@chakra-ui/react';
 import Sidebar from '../components/Sidebar';
 import Loader from '../components/Loader';
+import { Helmet } from 'react-helmet';
 
 const Profile = () => {
     const [loading,setLoading]=useState(false)
@@ -9,7 +10,9 @@ const Profile = () => {
       
 
       <Flex marginTop={"60px"} className="mainbox" >
-            
+            <Helmet>
+        <title> Admin Profile </title>
+      </Helmet>
             <Box>
               <Sidebar />
             </Box>

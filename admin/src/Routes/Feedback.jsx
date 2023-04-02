@@ -3,7 +3,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import Sidebar from '../components/Sidebar';
 import Loader from '../components/Loader';
 import {  Table, Thead, Tr, Th, Tbody } from "@chakra-ui/react";
-
+import { Helmet } from 'react-helmet';
 
 
 
@@ -93,6 +93,9 @@ const Feedback = () => {
 
     return (
         <Flex marginTop="60px" className='mainbox'   >
+          <Helmet>
+        <title> FeedBack </title>
+      </Helmet>
             
       <Box>
         <Sidebar />
