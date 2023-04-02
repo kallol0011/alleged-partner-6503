@@ -7,12 +7,12 @@ import Footer from "../components/Footer";
 const Products = () => {
   return (
     <>
-      <Box m={10} display={"flex"}>
+      <Box m={10}  gap={"10px"} display={"flex"}>
        
-          <Box w={"15%"} >
+          <Box w={"18%"} backgroundColor={"#232f3d"} color={"white"} marginLeft={-10} paddingLeft={5}>
             <Sidebar />
           </Box>
-          <Box width={"100%"}>
+          <Box width={"100%"}paddingLeft={10}>
             <ProductList/>
           </Box>
       </Box>
