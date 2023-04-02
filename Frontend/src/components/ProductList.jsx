@@ -8,21 +8,28 @@ const ProductList = () => {
   const [searchparam,setsearchparam]=useSearchParams()
   const initial=searchparam.getAll("rating")
   const initialcat=searchparam.getAll("category")
+  const initialOder=searchparam.get("order")
+  const initialSort=searchparam.get("sort")
   const location=useLocation()
   const Dispatch=useDispatch()
 const {isLoading,isError,products}=useSelector((store)=>store.proReducer)
 
-// console.log(products)
+//  const deat=products.sort((a,b)=>b.price-a.price)
+//  console.log("data",deat)
 let obj={
   params:{
     rating:initial,
-    category:initialcat
+    category:initialcat,
+    sort:initialSort,
+    order:initialOder
   },
  }
 
   useEffect(()=>{
     Dispatch(getProducta(obj))
   },[location.search])
+
+  
   return <>
   <Box>
     {products.map((el,i)=>{

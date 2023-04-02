@@ -9,7 +9,7 @@ const Products = () => {
     <>
       <Box mt={12} display={"flex"} background={"blackAlpha.100"}>
        
-          <Box w={"15%"} >
+          <Box w={"15%"} pl={4}>
             <Sidebar />
           </Box>
           <Box width={"100%"}>
