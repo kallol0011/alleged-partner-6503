@@ -17,6 +17,8 @@ import {
   SimpleGrid
 } from "@chakra-ui/react";
 import { AiFillCar } from 'react-icons/ai';
+import BarChart from '../components/Charts';
+import PieChart from '../components/PieChart';
 
 
 const baseUrl=`https://strange-crown-worm.cyclic.app`
@@ -97,10 +99,14 @@ const elements = [
               <SimpleGrid columns={{ lg: 2, sm: 1, base: 1 }} ml="-1%" className="mainbox"  >
               <Box   width={"100%"}  >
                 <Text className="title" color="green">
-                  AVAILABLE PRODUCTS{" "}
+                  AVAILABLE PRODUCTS    {" "}
                 </Text>
-                {/* <Image src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9o22bmESU-hMYf09EVb30gvWpw_WJDbJer9hiVGq2XEzzRAlTo8E-3gpcQN6eJv9l45s&usqp=CAU"} alt={"chart"} /> */}
-                <Flex flexWrap="wrap" display={"flex"}  justifyContent={"center"}>
+                  <Box width={{lg:"43vw",sm:"100vw"}}  >
+                      
+                      <BarChart/>
+                    
+                    </Box> 
+                <Flex flexWrap="wrap" display={"flex"}  justifyContent={"center"} mt={"4.9vh"} >
                   
                   
                    
@@ -142,11 +148,13 @@ const elements = [
 
               </Box>
               <Box margin={"21px"}  paddingLeft={"2%"} paddingRight={"2%"} marginTop={"0%"}  >
-                <Text className="title" color="red">
+                <Text className="title" color="red.600">
                   OUT OF STOCK PRODUCTS
                 </Text>
-                {/* <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7-HdXDPIAadWkVaWPwASZbO7MFvcyv-V46w&usqp=CAU" alt="image" /> */}
-                <Flex flexWrap="wrap" justifyContent={"center"}>
+                <Box m={"auto"}   w={"60%"}  >
+                  <PieChart/>
+                </Box>
+                <Flex flexWrap="wrap" justifyContent={"center"} mt={"2vh"} >
                 {elements.map(function (el) {
                     return (
                       
