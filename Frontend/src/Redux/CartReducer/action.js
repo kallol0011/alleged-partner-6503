@@ -30,11 +30,23 @@ export const decreaseCartQuantity = (id) => ({
     payload: id
 });
 
+
+
+// export const decreaseCartQuantity = () => ({
+//     type: DECREASE_CART_QUANTITY,
+//     // payload: id
+// });
+
         //* remove item from cart
-export const removeDataFromCart = (id) => ({
+export const removeDataFromCart = () => ({
     type: REMOVE_DATA_FROM_CART,
-    payload: id
+    // payload: id
 });
+
+// export const removeDataFromCart = (id) => ({
+//     type: REMOVE_DATA_FROM_CART,
+//     payload: id
+// });
 
         //* remove All item from cart
 export const deleteAllFromCart = () => ({
@@ -57,3 +69,39 @@ export const fetchAllProducts = () => {
 
     
 };
+
+
+
+  export const removeitem=(id)=> async(dispatch)=>{
+      let res = await fetch(`http://localhost:8080/cart/delete/${id}`,{
+          method:"DELETE",
+          headers:{
+              "Authorization":`${localStorage.getItem("token")}`
+            }
+        })
+        
+        res = await res.json()
+        dispatch(removeDataFromCart())
+       
+      }
+
+
+    //   export const updateData= (id,quan)=> async (dispatch)=>{
+  
+     
+    //   console.log(x)
+    //     let res = await fetch(`http://localhost:8080/cart/update/${id}`,{
+    //       method:"PATCH",
+    //       body:JSON.stringify({
+    //         quantity:quan-1
+    //       }),
+    //       headers:{
+    //         "Authorization":`${localStorage.getItem("token")}`
+    //       }
+    //     })
+
+    //     res = await res.json()
+    //     dispatch(decreaseCartQuantity())
+    
+    
+    // }
