@@ -37,73 +37,115 @@
  import { BsCart2, BsFillPersonFill, BsShieldFillCheck } from "react-icons/bs";
  import { MdOutlinePayments } from "react-icons/md";
 import { Link } from "react-router-dom";
- 
+import { fetchAllProducts } from "../Redux/CartReducer/action";
+import { useDispatch, useSelector } from 'react-redux';
+import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDataFromCart } from "../Redux/CartReducer/action"
+
  const Cart=()=>{
-    // const mynav = useNavigate();
-  
-    // const [CartData, setCartData] = useState([]);
-
-    const CartData=[
-        {
-            img: "https://m.media-amazon.com/images/I/31aNgbvYJKL._AC_SY200_.jpg",
-            price: 66,
-            DealOfDay: "Deal of the Day",
-            desc: "Best Prices on boAt Headphones, Soundbars and Speakers",
-            id:1,
-            quantity:1
-          },
-          {
-            img: "https://m.media-amazon.com/images/I/31G1NouVxaL._AC_SY200_.jpg",
-            price: 80,
-            DealOfDay: "Deal of the Day",
-            desc: "Jaw dropping deals on headsets",
-            id:2,
-            quantity:1
-          },
+    
+   const dispatch = useDispatch();
+   
+   const [CartData, setCartData] = useState([]);
+    
+     const [show, setShow] = useState(false);
+     const [TotalSum, setTotalSum] = useState(0);
+     const cartData = useSelector(state => state.cartReducer.cartData);
+    // const getData=async()=>{
+    //   let res = await fetch(`http://localhost:8080/cart`,{
+    //     method:"GET",
+    //     headers:{
+    //       "Authorization": `${localStorage.getItem("token")}`
+    //     }
+    //   })
+    //   res = await res.json()
+    //   console.log(res)
+    //   setCartData(res)
+    // }
+    
+    useEffect(() => {
+      dispatch(fetchAllProducts());
+      setCartData(cartData)
+    }, []);
+    
+    // const TotalPrice = () => {
+    // };
+    useEffect(() => {
+      let sum = 0;
+      cartData.forEach((item) => (sum += item.price * item.quantity));
+      setTotalSum(sum);
+      // TotalPrice();
+     
+    }, [cartData,TotalSum]);
+   
+    // const handleQuant=(id,num)=>{
+    // setQuantity(quantity+num)
+    //   let payload = {quantity}
       
-          {
-            img: "https://m.media-amazon.com/images/I/31EXkIBVKUL._AC_SY200_.jpg",
-            price: 50,
-            DealOfDay: "Deal of the Day",
-            desc: "adidas & campus Footwear",
-            id:3,
-            quantity:1
-          }
-    ]
+    //   fetch(`http://localhost:8080/cart/update/${id}`,{
+    //       method:"PATCH",
+    //       body:JSON.stringify(payload),
+    //       headers:{
+    //         "Content-Type":"application/json",
+    //         "Authorization":`${localStorage.getItem("token")}`
+    //       }
+    //   })
+    //   .then((res)=>res.json())
+    //   .then((res)=>{
+    //     getData()
+    //     // setQuantity(1)
+    //   })
+    //   .catch((err)=>{
+    //     console.log(err)
+    //   })
+
+    //   //  setQuantity(1)
+    // }
+
+       
   
     
-    const [show, setShow] = useState(false);
-    const [TotalSum, setTotalSum] = useState(0);
+      //   const removeitem=async(id)=>{
+      //     let res = await fetch(`http://localhost:8080/cart/delete/${id}`,{
+      //       method:"DELETE",
+      //     headers:{
+      //         "Authorization":`${localStorage.getItem("token")}`
+      //       }
+      //   })
+
+      //   res = await res.json()
+      //   getData()
+      // }
 
 
-    // const HandleDelete = (id) => {
-    //     axios.delete(`https://alok-verma-rct.onrender.com/crankdealCart/${id}`);
-    //     let NewData = CartData.filter((item) => item.id !== id);
-    //     setCartData(NewData);
-    //   };
+   
     
-      const HandleQuantityChange = (id, quan, num) => {
-        // axios({
-        //   method: "patch",
-        //   url: `https://alok-verma-rct.onrender.com/crankdealCart/${id}`,
-        //   data: {
-        //     quantity: quan + num,
-        //   },
-        // }).catch((error) => console.log(error));
+      // const HandleQuantityChange = async(id,quan,num) => {
+      //   let x = quan+num
+      //   let res = await fetch(`http://localhost:8080/cart/update/${id}`,{
+      //     method:"PATCH",
+      //     body:JSON.stringify({
+      //       quantity:x
+      //     }),
+      //     headers:{
+      //       "Authorization":`${localStorage.getItem("token")}`
+      //     }
+      //   })
+
+      //   res = await res.json()
+
+
+      //   const newData = CartData.filter((item) => {
+      //     return item._id === id ? (item.quantity = item.quantity + num) : item;
+      //   });
+      //   setCartData(newData);
+      //   console.log(res)
+
+      //   //  getData()
+        
+      // };
     
-        const newData = CartData.filter((item) => {
-          return item.id === id ? (item.quantity = item.quantity + num) : item;
-        });
-        // setCartData(newData);
-        CartData=newData
-        TotalPrice();
-      };
-    
-      const TotalPrice = () => {
-        let sum = 0;
-        CartData.forEach((item) => (sum += item.price * item.quantity));
-        setTotalSum(sum);
-      };
+      console.log(cartData)
+      console.log(TotalSum)
     return(
         <div style={{marginTop:"40px"}}>
 <TableContainer p="20px">
@@ -127,29 +169,27 @@ import { Link } from "react-router-dom";
                           <Button onClick={() => setShow(true)}>Check</Button>
                         </Box>
                       </Th>
-                      <Th> Total ({CartData.length} )Items</Th>
+                      <Th> Total ({cartData&&cartData.length} )Items</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {CartData?.map((item) => {
+                    {cartData&&cartData?.map((item) => {
                       return (
                         <>
-                          <Tr key={item.id}>
+                          <Tr key={item._id}>
                             <Td>
-                                <img src={item.img}/ >
+                                <img src={item.image}/ >
                             </Td>
-                            <Td w="40px">{item.DealOfDay}</Td>
+                            <Td w="10px">{item.title.substring(0, 30)}...</Td>
                             <Td>{item.price}</Td>
                             <Td fontSize={"20px"}>
                               <button
                                 className="add-reduce-btn"
-                                onClick={() =>
-                                  HandleQuantityChange(
-                                    item.id,
-                                    item.quantity,
-                                    -1
-                                  )
-                                }
+                                // onClick={() =>
+                                  
+                                //   HandleQuantityChange(item._id,item.quantity,-1)
+                                //   }
+                                onClick={ () => dispatch(decreaseCartQuantity(item._id))}
                                 disabled={item.quantity <= 1}
                               >
                                 -
@@ -157,13 +197,13 @@ import { Link } from "react-router-dom";
                               {item.quantity}
                               <button
                                 className="add-reduce-btn"
-                                onClick={() =>
-                                  HandleQuantityChange(
-                                    item.id,
-                                    item.quantity,
-                                    1
-                                  )
-                                }
+                                // onClick={() =>
+                                //   handleQuant(
+                                //     item._id,
+                                //     1
+                                //   )
+                                // }
+                                onClick={ () => dispatch(increaseCartQuantity(item._id)) }
                               >
                                 +
                               </button>
@@ -185,7 +225,8 @@ import { Link } from "react-router-dom";
                             m="10px"
                             color="red"
                             variant={"outline"}
-                            // onClick={() => HandleDelete(item.id)}
+                            // onClick={() => removeitem(item._id)}
+                            onClick={ () => dispatch(removeDataFromCart(item._id)) }
                           >
                             Remove Item
                           </Button>
