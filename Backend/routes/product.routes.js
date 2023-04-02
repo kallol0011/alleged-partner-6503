@@ -65,6 +65,31 @@ productRouter.get("/singleproduct/:productID",async(req,res)=>{
 
 })
 
+// productRouter.get("/sortasc",async(req,res)=>{
+//   const payload=req.query
+//     try{
+//         let product=await ProductModel.find(payload)
+//         product=product.sort((a,b)=>a.price-b.price)
+//         res.status(200).send(product)
+
+//     }catch(err){
+//         res.status(400).send(err)
+//     }
+
+// })
+
+// productRouter.get("/sortdesc",async(req,res)=>{
+//   const payload=req.query
+//     try{
+//         let product=await ProductModel.find(payload)
+//         product=product.sort((a,b)=>b.price-a.price)
+//         res.status(200).send(product)
+
+//     }catch(err){
+//         res.status(400).send(err)
+//     }
+
+// })
 //export module
 
 module.exports={productRouter}
