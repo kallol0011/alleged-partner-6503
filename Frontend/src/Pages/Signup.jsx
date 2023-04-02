@@ -43,7 +43,7 @@ const Signup = () => {
 
      try {
       
-      let res = await fetch("http://localhost:8080/user/register",{
+      let res = await fetch("https://strange-crown-worm.cyclic.app/user/register",{
        method:'POST',
        headers:{
         "content-type":"application/json"
