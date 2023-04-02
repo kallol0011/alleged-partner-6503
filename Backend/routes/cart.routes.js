@@ -131,10 +131,12 @@ cartRouter.delete("/delete/:cartID",async(req,res)=>{
     const token=req.headers.authorization
     const decoded=jwt.verify(token,"masai")
     const req_id=decoded.userID
+    console.log(req_id)
     //console.log(req_id)
     const {cartID}=req.params;
     const cart=await CartModel.findOne({_id:cartID})
     const userID_in_cart=cart.userID
+    console.log(userID_in_cart)
     
     try{
         if(req_id==userID_in_cart){

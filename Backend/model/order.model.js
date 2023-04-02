@@ -13,6 +13,7 @@ const orderSchema=mongoose.Schema({
     view:String,
     category:String,
     userID:String,
+    quantity:Number,
     time:String,
     date:String
 },{
