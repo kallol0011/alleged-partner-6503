@@ -18,7 +18,7 @@ import {
 
 const getData=()=>{
   
-  return fetch(`http://localhost:8080/admin/getuser`,{
+  return fetch(`https://strange-crown-worm.cyclic.app/admin/getuser`,{
     method:"GET",
     headers:{
       "Content-Type":"application/json",

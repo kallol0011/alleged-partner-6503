@@ -21,19 +21,6 @@ import {
 import Sidebar from "../components/Sidebar";
 import { useNavigate, useParams } from "react-router-dom";
 
-
-// const getData=(id)=>{
-//     return fetch(`http://localhost:8080/admin/${id}`,{
-//       method:"GET",
-//       headers:{
-//         "Content-Type":"application/json",
-//         "Authorization":localStorage.getItem("token")
-//       }
-//     })
-//     .then((res)=>res.json())
-// }
-
-// /update/:productID
 const UpdateData = () => {
     const [product,setproduct]=useState([]) 
     const [title, settitle] = useState("");     //  product[0].title
@@ -78,6 +65,7 @@ const elments = [
 ];
 
 
+const baseUrl=`https://strange-crown-worm.cyclic.app`
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -85,9 +73,8 @@ const elments = [
     
     
     console.log(data);
-    // const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NDI4MjFjZDY0OWVmOTdkMTJjOGVkZDQiLCJpYXQiOjE2ODAzNTE3MDZ9.VS0sgezYpPOGXtsf6XelmO1hZB4EWQUKV9YTnhURiCs"
-    // localStorage.setItem("Authorization",JSON.stringify(token))
-    fetch(`http://localhost:8080/admin/update/${id}`,{
+    
+    fetch(`${baseUrl}/admin/update/${id}`,{
       
       method:"PATCH",
       headers:{
@@ -111,17 +98,8 @@ const elments = [
       
     })
 
-
-
-
-
-
-
   };
 
-  
-
-  
 
   return (
     <Flex marginTop="60px" className="mainbox" >

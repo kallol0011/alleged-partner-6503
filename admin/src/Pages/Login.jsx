@@ -28,7 +28,7 @@ const Login = () => {
  
           console.log(data)
 
-          fetch(`http://localhost:8080/user/login`,{
+          fetch(`https://strange-crown-worm.cyclic.app/user/login`,{
       
       method:"POST",
       headers:{

@@ -19,9 +19,23 @@ import {
 import { AiFillCar } from 'react-icons/ai';
 
 
+const baseUrl=`https://strange-crown-worm.cyclic.app`
+
 const getData=()=>{
-  return fetch(`http://localhost:8080/product`)
+  // if(payload!==""){
+    return fetch(`https://strange-crown-worm.cyclic.app/admin`,{  //page/${page}?category=${catagory}
+    method:"GET",
+    headers:{
+      "Content-Type":"application/json",
+      "Authorization":localStorage.getItem("token")
+    }
+
+  })
   .then((res)=>res.json())
+
+  
+   
+  
 }
 
 const Dashboard = () => {
