@@ -98,10 +98,7 @@ const Feedback = () => {
         <Sidebar />
       </Box>
    
-      {/* {testId}
-{testname}
-{testuserID}
-{testfeedback} */}
+      
         
         <Box matgin="auto" >
             {

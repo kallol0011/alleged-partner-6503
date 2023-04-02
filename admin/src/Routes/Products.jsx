@@ -14,6 +14,7 @@ import {
     Button,
     Select,
     useToast,
+    Input,
   } from "@chakra-ui/react";
 
   import { FiEdit } from "react-icons/fi";
@@ -25,44 +26,63 @@ import { RxDotFilled } from "react-icons/rx";
 import Loader from '../components/Loader';
 import { Link, useNavigate } from 'react-router-dom';
 
-const getData=()=>{
-   return fetch(`http://localhost:8080/product`)
-    .then((res)=>res.json())
+const getData=(page,catagory)=>{
+  // if(payload!==""){
+    return fetch(`http://localhost:8080/admin/page/${page}?category=${catagory}`,{  //page/${page}?category=${catagory}
+    method:"GET",
+    headers:{
+      "Content-Type":"application/json",
+      "Authorization":localStorage.getItem("token")
+    }
+
+  })
+  .then((res)=>res.json())
+
+  
+
+  // }else{
+  //   return fetch(`http://localhost:8080/admin`,{
+  //     method:"GET",
+  //     headers:{
+  //       "Content-Type":"application/json",
+  //       "Authorization":localStorage.getItem("token")
+  //     }
+  
+  //   })
+  //   .then((res)=>res.json())
+  // }
+   
+  
 }
 
 const Products = () => {
 
     const [loading,setLoading]=useState(true)
-    const [cetagory,setCetagory]=useState(false)
+    const [category,setCategory]=useState("mobile")
+    const [page,setPage]=useState(1)
+    const [dlt,setdlt]=useState(1)
+
     const [product, setProduct] = useState([])
     
     const navigate=useNavigate()
     const toast = useToast()
 
+    
 
-    const elments = [
-      "watch",
-      "mobile",
-      "kitchen",
-      "bag",
-      "earphone",
-      "laptop",
-      "mens",
-      "womens",
-      "cameras",
-    ];
+    
 
     useEffect(()=>{
-      getData().then((res)=>{setProduct(res)
+      getData(page,category).then((res)=>{setProduct(res)
         
         setLoading(false)
       })
-    },[])
+    },[category,page,dlt])
     
     
     
     const deleteProduct=(id)=>{
       // 
+      setdlt(Math.random())
       console.log(id)
       fetch(`http://localhost:8080/admin/delete/${id}`,{
         method:"DELETE",
@@ -86,14 +106,17 @@ const Products = () => {
 
     }
 
-    console.log(product)
+    console.log("category",category)
+    console.log("type",typeof(category))
      
     const Sort=()=>{
          
          
     }
 
-    // let filterCatagory=
+    
+
+    
 
     return (
         <Flex marginTop={"60px"} className="mainbox" >
@@ -126,19 +149,30 @@ const Products = () => {
                   <Th  >
                     <Select
                       placeholder="CAREGORY"
+                      
                       variant="flushed"
+                      value={category}
                       onChange={(e) => {
-                        // dispatch(PageChange(1));
-                        // setLocation(e.target.value);
-                        setCetagory(e.target.value)
+                        
+                        setCategory(e.target.value)
                       }}
                       fontSize="12px"
                       fontWeight="bold"
                       width="100px"
                     >
-                       {elments.map((el) => {
-                        return <option style={{fontSize:"15px"}} > &nbsp; &nbsp;{el}</option>;
-                      })} 
+                       
+                        <option style={{fontSize:"15px"}} value="watch" > &nbsp; &nbsp; watch </option>;
+                        <option style={{fontSize:"15px"}} value="mobile" > &nbsp; &nbsp; mobile </option>;
+                        <option style={{fontSize:"15px"}} value="laptop" > &nbsp; &nbsp; laptop </option>;
+                        <option style={{fontSize:"15px"}} value="product" > &nbsp; &nbsp; product </option>;
+                        <option style={{fontSize:"15px"}} value="cream" > &nbsp; &nbsp; cream </option>;
+                        <option style={{fontSize:"15px"}} value="cream" > &nbsp; &nbsp; cream </option>;
+                        <option style={{fontSize:"15px"}} value="clothes" > &nbsp; &nbsp; clothes </option>;
+                        <option style={{fontSize:"15px"}} value="kitchen" > &nbsp; &nbsp; kitchen </option>;
+                        <option style={{fontSize:"15px"}} value="shoes" > &nbsp; &nbsp; shoes </option>;
+                        <option style={{fontSize:"15px"}} value="shoes" > &nbsp; &nbsp; shoes </option>;
+                        <option style={{fontSize:"15px"}} value="jewellery" > &nbsp; &nbsp; jewellery </option>;
+                      
                     </Select>
                   </Th>
                   <Th color={"red.600"} textAlign={"center"}>
@@ -151,8 +185,8 @@ const Products = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                {product &&
-                  product.map((el) => {
+                {
+                  product?.map((el) => {
                     return (
                       
                       <Tr key={el._id} >
@@ -196,6 +230,11 @@ const Products = () => {
               </Tbody>
             </Table>
             {/* {Pagination(page, count, handlePageChange)}{" "} */}
+            <Box my={"2vh"} mb={"4vh"} textAlign={"center"} >
+            <Button w={"6vw"} disabled={page===1} onClick={()=>setPage(page-1)} >prev</Button>
+            <Button mx={"1vw"} >{page}</Button>
+            <Button w={"6vw"} onClick={()=>setPage(page+1)} >next</Button>
+            </Box>
           </>
         )}
       </Box>

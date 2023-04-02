@@ -27,10 +27,12 @@ adminRouter.post("/add",async(req,res)=>{
 
 adminRouter.get("/",async(req,res)=>{
     const token=req.headers.authorization;
+    
     const decoded = jwt.verify(token, 'masai');
+    const payload=req.query
     try{
         if(decoded){
-            let user=await ProductModel.find()
+            let user=await ProductModel.find(payload)
             res.status(200).send(user)
         }else{
             res.status(400).send({msg:"please login first"})
@@ -174,6 +176,25 @@ adminRouter.delete("/deleteorder/:orderID",async(req,res)=>{
 
 })
 
+adminRouter.get("/page/:no",async(req,res)=>{
+    const token=req.headers.authorization;
+    const decoded = jwt.verify(token, 'masai');
+    const {no}=req.params;
+    const payload=req.query
+    try{
+        if(decoded){
+            let page=(no-1)*5
+            let user=await ProductModel.find(payload).skip(page).limit(5)
+            res.status(200).send(user)
+        }else{
+            res.status(400).send({msg:"login"})
+        }
+
+    }catch(err){
+        res.status(400).send({msg:err})
+    }
+
+})
 
 
 

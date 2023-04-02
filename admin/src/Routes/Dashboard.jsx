@@ -13,7 +13,7 @@ import {
   StatLabel,
   StatNumber,
   StatHelpText,
-  StatArrow,
+  
   SimpleGrid
 } from "@chakra-ui/react";
 import { AiFillCar } from 'react-icons/ai';
@@ -85,8 +85,8 @@ const elements = [
                 <Text className="title" color="green">
                   AVAILABLE PRODUCTS{" "}
                 </Text>
-                <Image src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9o22bmESU-hMYf09EVb30gvWpw_WJDbJer9hiVGq2XEzzRAlTo8E-3gpcQN6eJv9l45s&usqp=CAU"} alt={"chart"} />
-                <Flex flexWrap="wrap" justifyContent={"center"}>
+                {/* <Image src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9o22bmESU-hMYf09EVb30gvWpw_WJDbJer9hiVGq2XEzzRAlTo8E-3gpcQN6eJv9l45s&usqp=CAU"} alt={"chart"} /> */}
+                <Flex flexWrap="wrap" display={"flex"}  justifyContent={"center"}>
                   
                   
                    
@@ -94,7 +94,7 @@ const elements = [
                   {Object.keys(groupedProducts).map(category =>  {
                     return (
                       
-                      <Box className="city" width={"11vw"}  >
+                      <Box className="city" width={{lg:"11vw",sm:"21vw"}}  >
                         <Stat>
                           
                           
@@ -131,12 +131,12 @@ const elements = [
                 <Text className="title" color="red">
                   OUT OF STOCK PRODUCTS
                 </Text>
-                <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7-HdXDPIAadWkVaWPwASZbO7MFvcyv-V46w&usqp=CAU" alt="image" />
+                {/* <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7-HdXDPIAadWkVaWPwASZbO7MFvcyv-V46w&usqp=CAU" alt="image" /> */}
                 <Flex flexWrap="wrap" justifyContent={"center"}>
                 {elements.map(function (el) {
                     return (
                       
-                      <Box className="city" key={el._id} width={"11vw"} >
+                      <Box className="city" key={el._id} width={{lg:"11vw",sm:"21vw"}} >
                         <Stat  >
                           <StatLabel fontSize={"21px"} textAlign={"center"} >{el}</StatLabel>
                           <StatNumber></StatNumber>

@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { HiOutlineChartSquareBar } from "react-icons/hi";
 import { IoCarSportSharp } from "react-icons/io5";
 import { FiUsers } from "react-icons/fi";
@@ -12,15 +12,16 @@ import "../Styles/Sidebar.css"
 import { BsBoxFill } from "react-icons/bs";
 
 const Sidebar = () => {
-    // const dispatch = useDispatch();
-    // const state = useSelector => state.AuthManager);
-    // const state=false
-    // const { isAuth } = state;
+    
+  const navigate=useNavigate()
+  
+  const LogOut=()=>{
+    localStorage.removeItem("token")
+    navigate("/admin/login")
+  }
     return (
       <>
-        {/* {!isAuth ? (
-          <Navigate to="/admin/login" />
-         ) : ( */}
+        
           <Box
             className="sidebar"
             display={{ sm: "none", md: "block", lg: "block", base: "none" }}
@@ -87,7 +88,7 @@ const Sidebar = () => {
               className="link"
               marginTop={"30px"}
               variant={"outline"}
-            //   onClick={() => dispatch(auth_logout())}
+              onClick={() => LogOut()}
             >
               <Flex width={"150px"}>
                 <FiLogOut />

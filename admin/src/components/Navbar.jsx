@@ -24,40 +24,40 @@ import {
   AddIcon,
 } from "@chakra-ui/icons";
 import "../Styles/Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-// import LOGO from "../Images/shoppers_logo.png"
-// import LOGO from "../Images/LOGO.jpg"
+
 import LOGO from "../Images/newLOGO.jpg"
 
-// import { useDispatch, useSelector } from "react-redux/es/exports";
-// import { auth_logout } from "../Redux/Auth/auth.actions";
-// import { stateType } from "../Redux/Auth/auth.reducers";
+
 
 
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
-  //To be used for showing User Picture in Navbar
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  //Dispatch for Logout button
-
-//   const dispatch = useDispatch();
-//   const state = useSelector(() => state.AuthManager);
   
-// const { isAuth } = state;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  
+  const navigate=useNavigate()
+  
+  const LogOut=()=>{
+    localStorage.removeItem("token")
+    navigate("/admin/login")
+  }
+  
+
   return (
     <>
       <Box
         bg={useColorModeValue("gray.100", "gray.900")}
         px={4}
         position="fixed"
+        w={"100vw"}
         width="100%"
         top="0"
         zIndex={1}
+        // style={{overflowX:"auto"}}
       >
         <Flex
           h={16}
@@ -66,12 +66,14 @@ const Navbar = () => {
           padding={"0px 15px"}
         >
           <Box className="logoBox">
-            <img
+         {/* <Link to="/admin/dashboard" >   */}
+          <img
               className="logo"
-            //   src="https://64.media.tumblr.com/cd014008c2508e751dd7a4a02ce03a52/c70f2603c91255de-07/s400x600/1d705b0cebbc41a66d39b5e0c27b0586d37e4ff0.pnj"
              src={LOGO} 
+
             alt="logo"
-            />{" "}
+            />
+            {/* </Link>{" "} */}
           </Box>
 
           <Flex alignItems={"center"}>
@@ -83,7 +85,7 @@ const Navbar = () => {
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
               <div 
-            //   className={isAuth ? "show" : "hide"}
+            
               >
                 <Menu>
                   <MenuButton
@@ -134,25 +136,26 @@ const Navbar = () => {
           <Box pb={4} display={{ md: "none" }} color={"red.600"}>
             <Stack as={"nav"} spacing={4}>
               <Button onClick={onClose} variant={"outline"}>
-                <Link to="/">Dashboard</Link>
+                <Link to="/admin/dashboard">Dashboard</Link>
               </Button>
               <Button onClick={onClose} variant={"outline"}>
-                <Link to="/cars">Cars</Link>
+                <Link to="/admin/products">Products</Link>
               </Button>
               <Button onClick={onClose} variant={"outline"}>
-                <Link to="/users">Users</Link>
+                <Link to="/admin/users">Users</Link>
               </Button>
               <Button onClick={onClose} variant={"outline"}>
-                <Link to="/bookings">Bookings</Link>
+                <Link to="/admin/orders">Oeders</Link>
               </Button>
               <Button onClick={onClose} variant={"outline"}>
-                <Link to="/feedback">Feedback</Link>
+                <Link to="/admin/feedback">Feedback</Link>
               </Button>
               <Flex>
                 <Button
                   className="smlogout"
                   variant={"outline"}
-                //   onClick={() => dispatch<any>(auth_logout())}
+                  ml={"16vw"}
+                  onClick={() => LogOut()  }
                 >
                   Logout
                 </Button>

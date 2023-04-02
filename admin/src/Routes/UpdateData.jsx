@@ -16,6 +16,7 @@ import {
   PopoverContent,
   Button,
   Image,
+  FormControl,
 } from "@chakra-ui/react";
 
 import Sidebar from "../components/Sidebar";
@@ -39,7 +40,7 @@ const UpdateData = () => {
     const [title, settitle] = useState("");     //  product[0].title
     const [image, setImage] = useState("");     //  product[0].image
     const [price, SetPrice] = useState("");     //  product[0].price
-    const [categoty, setcategoty] = useState("");     //  product[0].category
+    const [category, setCategory] = useState("");     //  product[0].category
     const [discount, setdiscount] = useState("");     //  product[0].discount
 
 
@@ -81,12 +82,11 @@ const elments = [
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = {  price : +(price),categoty, discount, image, title };
+    const data = {  price : +(price),category, discount, image, title };
     
     
     console.log(data);
-    // const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NDI4MjFjZDY0OWVmOTdkMTJjOGVkZDQiLCJpYXQiOjE2ODAzNTE3MDZ9.VS0sgezYpPOGXtsf6XelmO1hZB4EWQUKV9YTnhURiCs"
-    // localStorage.setItem("Authorization",JSON.stringify(token))
+    
     fetch(`http://localhost:8080/admin/update/${id}`,{
       
       method:"PATCH",
@@ -102,7 +102,7 @@ const elments = [
         title: 'Account created.',
         description: "We've created your account for you.",
         status: 'success',
-        duration: 9000,
+        duration: 4000,
         isClosable: true,
         position:"top"
       })
@@ -112,11 +112,6 @@ const elments = [
     })
 
 
-
-
-
-
-
   };
 
   
@@ -124,13 +119,13 @@ const elments = [
   
 
   return (
-    <Flex marginTop="60px" className="mainbox" >
+    <Flex marginTop="60px" className="mainbox"  >
       <Box>
         <Sidebar />
       </Box>
-      <Box width={"80%"} padding="25px" margin="auto">
+        <Box width={{sm:"90%",lg:"80%"}}  margin="auto" padding={{lg:"25px",sm:"0px"}} >
         <Text className="head">UPDATE PRODUCT</Text>
-        <form style={{ width: "80%", margin: "auto" }} onSubmit={handleSubmit}>
+        <FormControl  width={{base:"80%",lg:"80%",sm:"95%"}}  margin= "auto"  >
           <FormLabel className="label">Title </FormLabel>
           <Input
             value={title}
@@ -147,17 +142,38 @@ const elments = [
             }}
           />
 
-          <FormLabel className="label">Cetagoty</FormLabel>
+          {/* <FormLabel className="label">Cetagoty</FormLabel> */}
+          
           <Select
-            placeholder={"Select cetagoty"}
-            onChange={(e) => {
-              setcategoty(e.target.value);
-            }}
-          >
-            {elments.map((el) => {
-              return <option>{el}</option>;
-            })}
-          </Select>
+                      placeholder="CAREGORY"
+                      variant="flushed"
+                      // bg={"green.100"}
+                      
+                      // pl={"90%"}
+                      value={category}
+                      onChange={(e) => {
+                        
+                        setCategory(e.target.value)
+                      }}
+                      fontSize="12px"
+                      fontWeight="bold"
+                      width="100px"
+                    >
+                       
+                        <option style={{fontSize:"15px"}} value="watch" > &nbsp; &nbsp; watch </option>;
+                        <option style={{fontSize:"15px"}} value="mobile" > &nbsp; &nbsp; mobile </option>;
+                        <option style={{fontSize:"15px"}} value="laptop" > &nbsp; &nbsp; laptop </option>;
+                        <option style={{fontSize:"15px"}} value="product" > &nbsp; &nbsp; product </option>;
+                        <option style={{fontSize:"15px"}} value="cream" > &nbsp; &nbsp; cream </option>;
+                        <option style={{fontSize:"15px"}} value="cream" > &nbsp; &nbsp; cream </option>;
+                        <option style={{fontSize:"15px"}} value="clothes" > &nbsp; &nbsp; clothes </option>;
+                        <option style={{fontSize:"15px"}} value="kitchen" > &nbsp; &nbsp; kitchen </option>;
+                        <option style={{fontSize:"15px"}} value="shoes" > &nbsp; &nbsp; shoes </option>;
+                        <option style={{fontSize:"15px"}} value="shoes" > &nbsp; &nbsp; shoes </option>;
+                        <option style={{fontSize:"15px"}} value="jewellery" > &nbsp; &nbsp; jewellery </option>;
+                      
+                    </Select>
+                    <Input value={category} />
           <FormLabel className="label">price</FormLabel>
           <Input
             value={price}
@@ -194,8 +210,10 @@ const elments = [
               </PopoverContent>
             </Popover>
           </Flex>
-          <Input type="submit" bg="green.600" color="white" margin="20px 0px" />
-        </form>
+          {/* <Input type="submit" bg="green.600" color="white" margin="20px 0px" /> */}
+         
+           <Button bg="green.600" color="white" margin="20px 0px" width={"100%"} onClick={handleSubmit} > Submit </Button>
+        </FormControl>
       </Box>
     </Flex>
   );

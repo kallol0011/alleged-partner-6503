@@ -49,7 +49,7 @@ const Login = () => {
       })
       
 
-      navigate("admin/products")
+      navigate("/admin/products")
       
     })
 

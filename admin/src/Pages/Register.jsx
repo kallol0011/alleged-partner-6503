@@ -46,7 +46,7 @@ const navigate=useNavigate()
         isClosable: true,
         position: 'top'
       })
-      navigate("admin/login")
+      navigate("/admin/login")
       
     })
 

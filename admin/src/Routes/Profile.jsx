@@ -20,20 +20,20 @@ const Profile = () => {
               </Box>
               ) : (
                 <>
-                  <VStack w={{lg:"47%",sm:"87%",base:"47%"}}  margin={"auto"} marginTop={"4%"} paddingBottom={"4%"}   >
-                      <Heading color={"green.600"} >ADMIN DETAILS</Heading>
-                     <FormControl w={"74%"}   p={"4%"} borderRadius={"4%"} 
+                  <VStack w={{lg:"47%",sm:"87%",base:"47%"}}  margin={"auto"} marginTop={"2.4%"} paddingBottom={"4%"}   >
+                      <Heading color={"green.600"} pb={"4vh"} >ADMIN DETAILS</Heading>
+                     <FormControl w={"71%"}   p={"4%"} borderRadius={"4%"} 
                       boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}
                      >
                       <Box    >
-                     <Image margin={"auto"} borderRadius={"56%"} w={"18%"}  src="https://bit.ly/dan-abramov" alt={"name"} />
+                     <Image margin={"auto"} borderRadius={"56%"} w={"18%"}  src="https://avatars.githubusercontent.com/u/110187301?v=4" alt={"K S"} />
                      </Box>
-                        <FormLabel> Name </FormLabel>
-                        <Input  />
-                        <FormLabel> Email Id </FormLabel>
-                        <Input  />
-                        <FormLabel> Password </FormLabel>
-                        <Input  />
+                        <FormLabel  > Name </FormLabel>
+                        <Input placeholder="kallol sarkar" />
+                        <FormLabel pt="2vh" > Email Id </FormLabel>
+                        <Input  placeholder="kallol007@gmail.com" />
+                        <FormLabel pt="2vh" > Password </FormLabel>
+                        <Input type="password" placeholder={"*******"} />
                         <Flex  justifyContent={"space-around"} mt={"4%"} >
                         <Button bg={"green.400"} w={"41%"} > Reset </Button>
                         <Button bg={"green.400"} w={"41%"} > Update </Button>

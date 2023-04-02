@@ -121,7 +121,7 @@ const deleteProduct=(id)=>{
                   
                     return (
                       <Tr key={el._id} >
-                        <Th> <Image stc={el.image} alt={el.title} /> </Th>
+                        <Th> <Image src={el.image} alt={el.title} /> </Th>
                         <Th> {el.title} </Th>
                         <Th> {el.category} </Th>
                         <Th> {el._id} </Th>

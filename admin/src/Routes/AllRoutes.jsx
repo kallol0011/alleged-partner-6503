@@ -6,8 +6,8 @@ import { Route, Routes } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Products from './Products';
 import Orders from './Orders';
-import Logout from './Logout';
 import Users from './Users';
+
 import Login from '../Pages/Login';
 import Profile from './Profile';
 import Feedback from './Feedback';
@@ -18,8 +18,7 @@ import UpdateData from './UpdateData';
 const AllRoutes = () => {
     return (
         <Routes>
-            {/* <Route path="/" element={<Home/>} /> */}
-            {/* <Route path="/signup" element={<Signup></Signup>} /> */}
+            
             <Route path="admin/login" element={<Login/>} />
 
             <Route path="admin/dashboard" element={<Dashboard/>} />
