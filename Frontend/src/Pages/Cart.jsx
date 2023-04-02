@@ -60,7 +60,7 @@ import { decreaseCartQuantity,deleteAllFromCart, increaseCartQuantity, removeDat
        
   
     const handleGetData=()=>{
-       fetch("http://localhost:8080/cart",{
+       fetch("https://strange-crown-worm.cyclic.app/cart",{
         method:"GET",
         headers:{
           "Content-Type":"application/json",
@@ -77,7 +77,7 @@ import { decreaseCartQuantity,deleteAllFromCart, increaseCartQuantity, removeDat
     }
 
     const handleDeleteData=(id)=>{
-      fetch(`http://localhost:8080/cart/delete/${id}`,{
+      fetch(`https://strange-crown-worm.cyclic.app/cart/delete/${id}`,{
         method:"DELETE",
         headers:{
           "Content-Type":"application/json",
@@ -96,7 +96,7 @@ import { decreaseCartQuantity,deleteAllFromCart, increaseCartQuantity, removeDat
 
     const handleAddQuantity=(id,num)=>{
       
-      fetch(`http://localhost:8080/cart/update/${id}`,{
+      fetch(`https://strange-crown-worm.cyclic.app/cart/update/${id}`,{
         method:"PATCH",
         body:JSON.stringify({quantity:num+1}),
         headers:{
@@ -119,7 +119,7 @@ import { decreaseCartQuantity,deleteAllFromCart, increaseCartQuantity, removeDat
       
     const handleSubQuantity=(id,num)=>{
       
-      fetch(`http://localhost:8080/cart/update/${id}`,{
+      fetch(`https://strange-crown-worm.cyclic.app/cart/update/${id}`,{
         method:"PATCH",
         body:JSON.stringify({quantity:num-1}),
         headers:{
@@ -141,7 +141,7 @@ import { decreaseCartQuantity,deleteAllFromCart, increaseCartQuantity, removeDat
     }
 
     const handleAddOrder=()=>{
-      fetch("http://localhost:8080/order/add",{
+      fetch("https://strange-crown-worm.cyclic.app/order/add",{
         method:"POST",
         body:JSON.stringify(cartData),
         headers:{
@@ -157,7 +157,7 @@ import { decreaseCartQuantity,deleteAllFromCart, increaseCartQuantity, removeDat
         console.log(err)
       })
 
-      fetch(`http://localhost:8080/cart/deleteallcart`,{
+      fetch(`https://strange-crown-worm.cyclic.app/cart/deleteallcart`,{
         method:"DELETE",
         headers:{
           "Content-Type":"application/json",

@@ -29,7 +29,7 @@ export default function Orderpage() {
   }, []);
 
   const hadleGetOrderData = () => {
-    fetch("http://localhost:8080/order", {
+    fetch("https://strange-crown-worm.cyclic.app/order", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

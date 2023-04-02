@@ -40,7 +40,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
       
    }  
   
-   let res = await fetch("http://localhost:8080/user/login",{
+   let res = await fetch("https://strange-crown-worm.cyclic.app/user/login",{
          method:'POST',
          headers:{
           "content-type":"application/json"
