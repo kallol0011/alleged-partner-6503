@@ -1,13 +1,10 @@
-import React, { FormEvent } from "react";
-import {useState}from "react"
-// import { useDispatch, useSelector } from "react-redux";
+import React, { FormEvent, useEffect, useState } from "react";
 import "../Styles/AddData.css"
 import axios from "axios"
 import {
   FormLabel,
   Input,
   Select,
-
   useToast,
   Flex,
   Box,
@@ -22,16 +19,50 @@ import {
 } from "@chakra-ui/react";
 
 import Sidebar from "../components/Sidebar";
+import { useNavigate, useParams } from "react-router-dom";
 
-const AddProduct = () => {
-  const [title, settitle] = useState("");
-  const [image, setImage] = useState("");
-  const [price, SetPrice] = useState("");
-  const [categoty, setcategoty] = useState("");
-  const [discount, setdiscount] = useState("");
+
+// const getData=(id)=>{
+//     return fetch(`http://localhost:8080/admin/${id}`,{
+//       method:"GET",
+//       headers:{
+//         "Content-Type":"application/json",
+//         "Authorization":localStorage.getItem("token")
+//       }
+//     })
+//     .then((res)=>res.json())
+// }
+
+// /update/:productID
+const UpdateData = () => {
+    const [product,setproduct]=useState([]) 
+    const [title, settitle] = useState("");     //  product[0].title
+    const [image, setImage] = useState("");     //  product[0].image
+    const [price, SetPrice] = useState("");     //  product[0].price
+    const [categoty, setcategoty] = useState("");     //  product[0].category
+    const [discount, setdiscount] = useState("");     //  product[0].discount
 
 
   const toast = useToast()
+
+  const params=useParams()
+  const id=params.id
+  console.log(id)
+
+
+  const navigate=useNavigate()
+
+
+   useEffect(()=>{
+    //  getData(id).then((res)=>{
+    //     setproduct(res)
+        
+    //  })
+   },[])
+
+   console.log("product",product)
+
+
 
 
 const elments = [
@@ -46,31 +77,19 @@ const elments = [
   "jewellery",
 ];
 
-  const newProduct = {
-    image: "https://m.media-amazon.com/images/I/61hVGtfIXGL._AC_UL320_.jpg",
-      title: "boAt Flash Edition Smart Watch with Activity Tracker, Multiple Sports Modes, 1.3\" Screen, 170+ Watch Faces, Sleep Monitor, Gesture, Camera & Music Control, IP68 & 7 Days Battery Life(Lightning Black)",
-      rating: 4,
-      view: "(28,613)",
-      price: 1199,
-      maxprice: 6990,
-      discount: "83% ",
-      delivery: "FREE Delivery by Amazon",
-      offer: "",
-      categoty: "product" 
-      
-  };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = { ...newProduct, price : price,categoty, discount: discount, image, title };
+    const data = {  price : +(price),categoty, discount, image, title };
     
     
     console.log(data);
     // const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NDI4MjFjZDY0OWVmOTdkMTJjOGVkZDQiLCJpYXQiOjE2ODAzNTE3MDZ9.VS0sgezYpPOGXtsf6XelmO1hZB4EWQUKV9YTnhURiCs"
     // localStorage.setItem("Authorization",JSON.stringify(token))
-    fetch(`http://localhost:8080/admin/add`,{
+    fetch(`http://localhost:8080/admin/update/${id}`,{
       
-      method:"POST",
+      method:"PATCH",
       headers:{
           "Content-Type":"application/json",
           "Authorization":localStorage.getItem("token")
@@ -88,8 +107,14 @@ const elments = [
         position:"top"
       })
       
+      navigate("/admin/products")
       
     })
+
+
+
+
+
 
 
   };
@@ -104,7 +129,7 @@ const elments = [
         <Sidebar />
       </Box>
       <Box width={"80%"} padding="25px" margin="auto">
-        <Text className="head">ADD A NEW PRODUCT</Text>
+        <Text className="head">UPDATE PRODUCT</Text>
         <form style={{ width: "80%", margin: "auto" }} onSubmit={handleSubmit}>
           <FormLabel className="label">Title </FormLabel>
           <Input
@@ -176,4 +201,4 @@ const elments = [
   );
 };
 
-export default AddProduct;
+export default UpdateData;

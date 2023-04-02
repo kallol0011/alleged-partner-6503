@@ -1,26 +1,14 @@
 //   import "./Css/Cart.css";
   import "./Cart.css"
  import {
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
+
+ 
     Button,
-    MenuGroup,
-    MenuDivider,
-    IconButton,
+   
     Flex,
     Text,
     Input,
-    Show,
-    Image,
-    useDisclosure,
-    Drawer,
-    DrawerOverlay,
-    DrawerContent,
-    DrawerCloseButton,
-    DrawerHeader,
-    DrawerBody,
+  
     TableContainer,
     Table,
     Thead,
@@ -33,42 +21,33 @@
     Tbody,
   } from "@chakra-ui/react";
   import React, { useEffect, useRef, useState } from "react";
- import axios from "axios"
+
  import { BsCart2, BsFillPersonFill, BsShieldFillCheck } from "react-icons/bs";
  import { MdOutlinePayments } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { fetchAllProducts } from "../Redux/CartReducer/action";
+//import { fetchAllProducts } from "../Redux/CartReducer/action";
+//import { removeitem } from "../Redux/CartReducer/action";
+// import { updateData } from "../Redux/CartReducer/action";
+import {allProducts} from "../Redux/CartReducer/action"
 import { useDispatch, useSelector } from 'react-redux';
-import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDataFromCart } from "../Redux/CartReducer/action"
+
+import { decreaseCartQuantity,deleteAllFromCart, increaseCartQuantity, removeDataFromCart } from "../Redux/CartReducer/action"
 
  const Cart=()=>{
     
    const dispatch = useDispatch();
    
-   const [CartData, setCartData] = useState([]);
+   //const [CartData, setCartData] = useState([]);
     
      const [show, setShow] = useState(false);
      const [TotalSum, setTotalSum] = useState(0);
      const cartData = useSelector(state => state.cartReducer.cartData);
-    // const getData=async()=>{
-    //   let res = await fetch(`http://localhost:8080/cart`,{
-    //     method:"GET",
-    //     headers:{
-    //       "Authorization": `${localStorage.getItem("token")}`
-    //     }
-    //   })
-    //   res = await res.json()
-    //   console.log(res)
-    //   setCartData(res)
-    // }
-    
+  
     useEffect(() => {
-      dispatch(fetchAllProducts());
-      setCartData(cartData)
+      handleGetData()
     }, []);
+
     
-    // const TotalPrice = () => {
-    // };
     useEffect(() => {
       let sum = 0;
       cartData.forEach((item) => (sum += item.price * item.quantity));
@@ -77,75 +56,128 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
      
     }, [cartData,TotalSum]);
    
-    // const handleQuant=(id,num)=>{
-    // setQuantity(quantity+num)
-    //   let payload = {quantity}
-      
-    //   fetch(`http://localhost:8080/cart/update/${id}`,{
-    //       method:"PATCH",
-    //       body:JSON.stringify(payload),
-    //       headers:{
-    //         "Content-Type":"application/json",
-    //         "Authorization":`${localStorage.getItem("token")}`
-    //       }
-    //   })
-    //   .then((res)=>res.json())
-    //   .then((res)=>{
-    //     getData()
-    //     // setQuantity(1)
-    //   })
-    //   .catch((err)=>{
-    //     console.log(err)
-    //   })
-
-    //   //  setQuantity(1)
-    // }
-
+    
        
   
+    const handleGetData=()=>{
+       fetch("http://localhost:8080/cart",{
+        method:"GET",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `${localStorage.getItem("token")}`
+        }
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+        dispatch(allProducts(res))
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+
+    const handleDeleteData=(id)=>{
+      fetch(`http://localhost:8080/cart/delete/${id}`,{
+        method:"DELETE",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `${localStorage.getItem("token")}`
+        }
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+        dispatch(removeDataFromCart())
+        handleGetData()
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+
+    const handleAddQuantity=(id,num)=>{
+      
+      fetch(`http://localhost:8080/cart/update/${id}`,{
+        method:"PATCH",
+        body:JSON.stringify({quantity:num+1}),
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `${localStorage.getItem("token")}`
+        }
+
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+         dispatch(increaseCartQuantity())
+         handleGetData()
+
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
+    }
+      
+    const handleSubQuantity=(id,num)=>{
+      
+      fetch(`http://localhost:8080/cart/update/${id}`,{
+        method:"PATCH",
+        body:JSON.stringify({quantity:num-1}),
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `${localStorage.getItem("token")}`
+        }
+
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+         dispatch(decreaseCartQuantity())
+         handleGetData()
+
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
+    }
+
+    const handleAddOrder=()=>{
+      fetch("http://localhost:8080/order/add",{
+        method:"POST",
+        body:JSON.stringify(cartData),
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `${localStorage.getItem("token")}`
+        }
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+        console.log(res)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
+      fetch(`http://localhost:8080/cart/deleteallcart`,{
+        method:"DELETE",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `${localStorage.getItem("token")}`
+        }
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+        dispatch(deleteAllFromCart())
+        handleGetData()
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
+      
+    }
+
     
-      //   const removeitem=async(id)=>{
-      //     let res = await fetch(`http://localhost:8080/cart/delete/${id}`,{
-      //       method:"DELETE",
-      //     headers:{
-      //         "Authorization":`${localStorage.getItem("token")}`
-      //       }
-      //   })
-
-      //   res = await res.json()
-      //   getData()
-      // }
-
-
-   
-    
-      // const HandleQuantityChange = async(id,quan,num) => {
-      //   let x = quan+num
-      //   let res = await fetch(`http://localhost:8080/cart/update/${id}`,{
-      //     method:"PATCH",
-      //     body:JSON.stringify({
-      //       quantity:x
-      //     }),
-      //     headers:{
-      //       "Authorization":`${localStorage.getItem("token")}`
-      //     }
-      //   })
-
-      //   res = await res.json()
-
-
-      //   const newData = CartData.filter((item) => {
-      //     return item._id === id ? (item.quantity = item.quantity + num) : item;
-      //   });
-      //   setCartData(newData);
-      //   console.log(res)
-
-      //   //  getData()
-        
-      // };
-    
-      console.log(cartData)
-      console.log(TotalSum)
+      
     return(
         <div style={{marginTop:"40px"}}>
 <TableContainer p="20px">
@@ -185,11 +217,9 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
                             <Td fontSize={"20px"}>
                               <button
                                 className="add-reduce-btn"
-                                // onClick={() =>
-                                  
-                                //   HandleQuantityChange(item._id,item.quantity,-1)
-                                //   }
-                                onClick={ () => dispatch(decreaseCartQuantity(item._id))}
+                               
+                                onClick={() =>handleSubQuantity(item._id,item.quantity)}
+                                // onClick={handleupdate(item._id,item.quantity)}
                                 disabled={item.quantity <= 1}
                               >
                                 -
@@ -203,7 +233,8 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
                                 //     1
                                 //   )
                                 // }
-                                onClick={ () => dispatch(increaseCartQuantity(item._id)) }
+                                onClick={()=>handleAddQuantity(item._id,item.quantity)}
+
                               >
                                 +
                               </button>
@@ -226,7 +257,8 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
                             color="red"
                             variant={"outline"}
                             // onClick={() => removeitem(item._id)}
-                            onClick={ () => dispatch(removeDataFromCart(item._id)) }
+                            // onClick={ () => dispatch(removeDataFromCart(item._id)) }
+                            onClick={()=>handleDeleteData(item._id)} 
                           >
                             Remove Item
                           </Button>
@@ -276,7 +308,7 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
                 </Box>
                 <Box textAlign={"left"} m="20px">
                   <Link to={"/checkout"}>
-                    <Button  fontSize={"20px"} p="30px 50px" colorScheme={"red"}>
+                    <Button  fontSize={"20px"} p="30px 50px" colorScheme={"red"} onClick={handleAddOrder}>
                       PROCEED TO PAY Rs. {TotalSum}
                     </Button>
                   </Link>
@@ -290,3 +322,66 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
 
 
  export default Cart
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ //   const removeitem=async(id)=>{
+      //     let res = await fetch(`http://localhost:8080/cart/delete/${id}`,{
+      //       method:"DELETE",
+      //     headers:{
+      //         "Authorization":`${localStorage.getItem("token")}`
+      //       }
+      //   })
+
+      //   res = await res.json()
+      //   getData()
+      // }
+
+
+   
+    
+      // const HandleQuantityChange = async(id,quan,num) => {
+      //   let x = quan+num
+      //   let res = await fetch(`http://localhost:8080/cart/update/${id}`,{
+      //     method:"PATCH",
+      //     body:JSON.stringify({
+      //       quantity:x
+      //     }),
+      //     headers:{
+      //       "Authorization":`${localStorage.getItem("token")}`
+      //     }
+      //   })
+
+      //   res = await res.json()
+
+
+      //   const newData = CartData.filter((item) => {
+      //     return item._id === id ? (item.quantity = item.quantity + num) : item;
+      //   });
+      //   setCartData(newData);
+      //   console.log(res)
+
+      //   //  getData()
+        
+      // };

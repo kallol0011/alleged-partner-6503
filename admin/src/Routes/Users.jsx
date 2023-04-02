@@ -17,7 +17,14 @@ import {
 } from "@chakra-ui/react";
 
 const getData=()=>{
-  return fetch(`http://localhost:8080/users`)
+  
+  return fetch(`http://localhost:8080/admin/getuser`,{
+    method:"GET",
+    headers:{
+      "Content-Type":"application/json",
+      "Authorization":localStorage.getItem("token")
+    }
+  })
   .then((res)=>res.json())
 }
 
@@ -57,8 +64,7 @@ console.log(data)
                 <Th>User Name</Th>
                 <Th>User ID</Th>
                 <Th>Email</Th>
-                <Th>Location</Th>
-                <Th>Order Id</Th>
+                
               </Tr>
             </Thead>
             <Tbody>
@@ -67,21 +73,20 @@ console.log(data)
                   <Tr key={el._id} >
                     <Th  width={"18%"} >
                       <Image
-                        src={el.avatar}
+                        src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909__340.png"
                         alt="user"
-                        // width={"28%"}
+                        
                         width={{ lg: "28%", sm: "62%", base: "28%" }}
                         borderRadius={"50%"}
                       />
                     </Th>
-                    <Th>{el.name}</Th>
+                    <Th>{el.firstname} {el.lastname}</Th>
                     <Th>
-                      {/* {el._id} */}
-                      {el.userId}
+                      
+                      {el._id}
                     </Th>
                     <Th>{el.email}</Th>
-                    <Th>  </Th>
-                    <Th>{el.orderId}</Th>
+                    
                   </Tr>
                 );
               })}

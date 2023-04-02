@@ -8,8 +8,8 @@ const orderRouter=express.Router()
 orderRouter.post("/add",async(req,res)=>{
     const token=req.headers.authorization;
     const decoded = jwt.verify(token, 'masai');
-    const payload=await CartModel.find({userID:decoded.userID});
-    //const payload=req.body;
+    //const payload=await CartModel.find({userID:decoded.userID});
+    const payload=req.body;
     try{
         if(decoded){
             for(let i=0; i<=payload.length-1; i++){

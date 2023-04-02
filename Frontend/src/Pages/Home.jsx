@@ -8,7 +8,7 @@ import {
   Link,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState,useEffect } from "react";
 import AutoPlay from "../components/cardSLider";
 import {
   acc,
@@ -23,8 +23,35 @@ import Footer from "../components/Footer";
 import ImgSlider from "../components/ImageSlider";
 
 import Carousel from "../components/SimpleSlider";
+import {useLocation,useNavigate} from "react-router-dom"
 
 const Home = () => {
+  const [category,setCategory]=useState("product")
+
+  const navigate=useNavigate()
+
+  const location=useLocation()
+  location.state=category
+
+  useEffect(()=>{
+
+  },[category])
+
+  //const token=localStorage.getItem("token")
+ 
+
+  const handleKitchen=()=>{
+    setCategory("kitchen")
+    navigate("/product")
+  }
+  const handleWatch=()=>{
+    setCategory("watch")
+    navigate("/product")
+  }
+ 
+
+
+  
   return (
     <Box>
       <Box boxSize={"border-box"}>
@@ -39,12 +66,12 @@ const Home = () => {
             pos={"absolute"}
           >
             <Flex justifyContent={"center"} gap={"6"}>
-              <Box w={"25%"} p={4} boxShadow="lg" bg="white" color={"black"}>
+              <Box w={"25%"} p={4} boxShadow="lg" bg="white" color={"black"} onClick={handleKitchen}>
                 <Heading pb={2} size="md">
                   Upgrade your home | Amazon Brands & more
                 </Heading>
                 <Box display="grid" gridTemplateColumns="repeat(2,1fr)" gap={4}>
-                  <Box>
+                  <Box >
                     <Image
                       src={
                         "https://images-eu.ssl-images-amazon.com/images/G/31/img22/PB/PC/Gateway/QC/Mixer-186x116._SY116_CB614658577_.jpg"
@@ -52,6 +79,7 @@ const Home = () => {
                     ></Image>
                     <Text>up to 50%off | home appliances</Text>
                   </Box>
+                  
                   <Box>
                     <Image
                       src={
@@ -78,7 +106,7 @@ const Home = () => {
                   </Box>
                 </Box>
               </Box>
-              <Box w={"25%"} boxShadow="lg" bg="white " color={"black"} p={4}>
+              <Box w={"25%"} boxShadow="lg" bg="white " color={"black"} p={4} onClick={handleWatch}>
                 <Heading pb={2} size={"md"}>
                   Bluetooth Calling Smartwatch starts at ₹1,999
                 </Heading>

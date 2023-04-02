@@ -13,6 +13,7 @@ import {
     Td,
     Button,
     Select,
+    useToast,
   } from "@chakra-ui/react";
 
   import { FiEdit } from "react-icons/fi";
@@ -22,10 +23,10 @@ import { MdAddCircle } from "react-icons/md";
 import { BiSort } from "react-icons/bi";
 import { RxDotFilled } from "react-icons/rx";
 import Loader from '../components/Loader';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const getData=()=>{
-   return fetch(`http://localhost:8080/products`)
+   return fetch(`http://localhost:8080/product`)
     .then((res)=>res.json())
 }
 
@@ -36,6 +37,8 @@ const Products = () => {
     const [product, setProduct] = useState([])
     
     const navigate=useNavigate()
+    const toast = useToast()
+
 
     const elments = [
       "watch",
@@ -49,12 +52,46 @@ const Products = () => {
       "cameras",
     ];
 
-
     useEffect(()=>{
-      getData().then((res)=>setProduct(res))
-      setLoading(false)
+      getData().then((res)=>{setProduct(res)
+        
+        setLoading(false)
+      })
     },[])
+    
+    
+    
+    const deleteProduct=(id)=>{
+      // 
+      console.log(id)
+      fetch(`http://localhost:8080/admin/delete/${id}`,{
+        method:"DELETE",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":localStorage.getItem("token")
+        }
 
+      })
+      .then((res)=>res.json())
+      .then((res)=>{console.log(res)
+        toast({
+          title: 'Delete.',
+          description: "Product is deleted successfully",
+          status: 'success',
+          duration: 9000,
+          position:"top",
+          isClosable: true,
+        })
+      })
+
+    }
+
+    console.log(product)
+     
+    const Sort=()=>{
+         
+         
+    }
 
     // let filterCatagory=
 
@@ -79,7 +116,7 @@ const Products = () => {
                   <Th display={"flex"} justifyContent={"space-around"}>
                     <Text>Price 	&nbsp;	&nbsp;	&nbsp;	&nbsp; </Text>
                     <Button 
-                    // onClick={() => SetSort(!sort)} color="red"
+                      onClick={()=>Sort()}
                     >   
                       <BiSort />
                     </Button>
@@ -106,7 +143,7 @@ const Products = () => {
                   </Th>
                   <Th color={"red.600"} textAlign={"center"}>
                     <Button 
-                    onClick={() => navigate("/addproduct")}
+                    onClick={() => navigate("/admin/addproduct")}
                     >
                       <MdAddCircle />
                     </Button>
@@ -137,16 +174,17 @@ const Products = () => {
                         <Td>{el.category}</Td>
                         <Td className="ope">
                           <Flex>
-                            <Button
+                           <Link to={`/admin/updateproduct/${el._id}`} > <Button
                               variant={"outline"}
-                            //   onClick={() => navigate(`/update/${el._id}`)}
+                            
                             >
-                              <FiEdit color="green" />
+                              <FiEdit color="green"  />
                             </Button>
+                            </Link>
                             <Button
                               variant={"outline"}
                               marginLeft="5px"
-                            //   onClick={() => dispatch(deleteCar(el._id!, page))}
+                               onClick={()=>deleteProduct(el._id)}
                             >
                               <MdDeleteForever color="green" />
                             </Button>

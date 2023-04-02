@@ -348,7 +348,7 @@ export default function Checkout() {
                     isClosable: true,
                   });
 
-                  mynav('/')
+                  mynav('/order')
                 }}>
                 Submit
               </Button>

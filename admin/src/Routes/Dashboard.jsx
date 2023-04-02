@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Image } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import Loader from '../components/Loader';
 import Sidebar from '../components/Sidebar';
@@ -20,22 +20,52 @@ import { AiFillCar } from 'react-icons/ai';
 
 
 const getData=()=>{
-  return fetch(`http://localhost:8080/products`)
+  return fetch(`http://localhost:8080/product`)
   .then((res)=>res.json())
 }
 
 const Dashboard = () => {
-  const [loading,setLoading]=useState(false)
-  // const [Booked, setBooked] = React.useState<({});
-  // const [Available, setAvailble] = React.useState({});
+  const [loading,setLoading]=useState(true)
+  
   const [data, setdata] = useState([])
 
 
   useEffect(()=>{
-    getData().then((res)=>setdata(res))
+    getData().then((res)=>{setdata(res)
+      setLoading(false)
+    })
   },[])
 
-console.log(data)
+
+  const groupedProducts = data.reduce((group, data) => {
+    if (!group[data.category]) {
+      group[data.category] = [];
+    }
+    group[data.category].push(data);
+    return group;
+  }, {});
+
+
+// console.log(typeof(groupedProducts))
+// console.log(typeof(groupedProducts.laptop))
+
+// let numOfKeys = Object.keys(groupedProducts).length;
+// console.log(numOfKeys); // Output: 3
+
+
+let categories = Object.keys(groupedProducts);
+console.log(categories)
+
+
+console.log(groupedProducts)
+
+const elements = [
+  "Books",
+  "furniture",
+  "Toys & Games",
+  "Kids",
+  "Pet Supplies"
+];
 
     return (
         <Flex marginTop="60px" className='mainbox' >
@@ -43,38 +73,49 @@ console.log(data)
       <Box>
         <Sidebar />
       </Box>
-      <Box margin="auto"> 
+      <Box margin="auto" > 
         {loading ? (
-          <Loader /> 
+          <Box margin={"auto"} ml={{base:"-167%",sm:"-86%"}}  marginTop={{lg:"192px",base:"192px",sm:"31vh"}} >
+          <Loader />
+        </Box> 
         ) : (
           <>
-              <SimpleGrid columns={{ lg: 2, sm: 1, base: 1 }} gap="8" className="mainbox" >
-              <Box margin="20px"  width={"100%"} >
+              <SimpleGrid columns={{ lg: 2, sm: 1, base: 1 }} ml="-1%" className="mainbox"  >
+              <Box   width={"100%"}  >
                 <Text className="title" color="green">
                   AVAILABLE PRODUCTS{" "}
                 </Text>
+                <Image src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9o22bmESU-hMYf09EVb30gvWpw_WJDbJer9hiVGq2XEzzRAlTo8E-3gpcQN6eJv9l45s&usqp=CAU"} alt={"chart"} />
                 <Flex flexWrap="wrap" justifyContent={"center"}>
-
+                  
+                  
                    
 
-                  {data.map(function (el) {
+                  {Object.keys(groupedProducts).map(category =>  {
                     return (
-                      el.quantity >0 &&
-                      <Box className="city" key={el._id} >
+                      
+                      <Box className="city" width={"11vw"}  >
                         <Stat>
-                          <StatLabel fontSize={"21px"} textAlign={"center"} > {el.category }  </StatLabel>
+                          
+                          
+                          
+                          <StatLabel fontSize={"21px"} textAlign={"center"} >  
+                             
+                          {[category]}
+                            </StatLabel>
                           <StatNumber>   </StatNumber>
                           <StatHelpText>
                             <Flex
                               justifyContent={"center"}
                               alignItems={"center"}
                             >
-                              <Text color="green" fontSize={"20px"}>
+                              <Text color="green" fontSize={"18px"} pr={"2%"} >
                                 <BsBox2Fill color="green" />
                               </Text>
                               &nbsp;
-                              <Text fontSize={"20px"} fontWeight={"bold"}>
-                              {el.quantity}
+                              <Text fontSize={"21px"}   fontWeight={"bold"}>
+                              
+                              {groupedProducts[category].length}
                               </Text>{" "}
                             </Flex>
                           </StatHelpText>
@@ -86,17 +127,18 @@ console.log(data)
 
 
               </Box>
-              <Box margin={"20px"}  paddingLeft={"2%"} paddingRight={"2%"} >
+              <Box margin={"21px"}  paddingLeft={"2%"} paddingRight={"2%"} marginTop={"0%"}  >
                 <Text className="title" color="red">
                   OUT OF STOCK PRODUCTS
                 </Text>
+                <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7-HdXDPIAadWkVaWPwASZbO7MFvcyv-V46w&usqp=CAU" alt="image" />
                 <Flex flexWrap="wrap" justifyContent={"center"}>
-                {data.map(function (el) {
+                {elements.map(function (el) {
                     return (
-                      el.quantity === 0 &&
-                      <Box className="city" key={el._id} >
+                      
+                      <Box className="city" key={el._id} width={"11vw"} >
                         <Stat  >
-                          <StatLabel fontSize={"21px"} textAlign={"center"} >{el.category}</StatLabel>
+                          <StatLabel fontSize={"21px"} textAlign={"center"} >{el}</StatLabel>
                           <StatNumber></StatNumber>
                           <StatHelpText>
                             <Flex
