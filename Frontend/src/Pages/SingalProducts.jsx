@@ -38,7 +38,7 @@ import Footer from "../components/Footer";
     //    token kaha hai 
     },[])
     const fetchData=()=>{
-        axios.get(`http://localhost:8080/product/singleproduct/${param.id}`).then((res)=>{
+        axios.get(`https://strange-crown-worm.cyclic.app/product/singleproduct/${param.id}`).then((res)=>{
            setProd(res.data)
            }).catch((err)=>{
           console.log("error")
@@ -54,7 +54,7 @@ import Footer from "../components/Footer";
       // .catch((err)=>{
       //   console.log(err)
       // })
-      fetch(`http://localhost:8080/cart/add/${id}`,{
+      fetch(`https://strange-crown-worm.cyclic.app/cart/add/${id}`,{
         method:"POST",
         body:JSON.stringify(prod),
         headers:{

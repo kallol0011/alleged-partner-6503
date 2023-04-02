@@ -27,7 +27,7 @@ const Navbar = () => {
       fetchData(search)
     },[search])
    const fetchData=async(data)=>{
-        axios.get(`http://localhost:8080/product/filter?q=${data}`).then((res)=>{
+        axios.get(`https://strange-crown-worm.cyclic.app/product/filter?q=${data}`).then((res)=>{
           console.log("hkjhdkahkdhkahdkashk",res.data)
           setdata(res.data)
         }).catch((err)=>{
