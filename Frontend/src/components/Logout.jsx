@@ -4,13 +4,11 @@ import {useNavigate} from "react-router-dom"
 
 
 function Logout() {
-    // const navigate=useNavigate()
-    // useEffect(()=>{
-    //     handleLogout()
-    // },[])
-
+    const navigate=useNavigate()
+    
     let handleLogout=()=>{
-        localStorage.removeItem("token")
+      localStorage.removeItem("token")
+     
         
     }
   return (

@@ -11,7 +11,10 @@ const cartSchema=mongoose.Schema({
     delivery:String,
     view:String,
     category:String,
-    quantity:Number,
+    quantity:{
+        type:Number,
+        default:1
+    },
     userID:String
 },{
     versionKey:false
