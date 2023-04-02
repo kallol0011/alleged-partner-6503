@@ -46,7 +46,7 @@ export const reducer = (state = initialState, { type, payload }) => {
         case REMOVE_DATA_FROM_CART: {
             return {
                 ...state,
-                cartData: state.cartData.filter(item => item._id !== payload)
+                // cartData: state.cartData.filter(item => item._id !== payload)
 
             };
         }

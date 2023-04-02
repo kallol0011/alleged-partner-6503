@@ -1,26 +1,14 @@
 //   import "./Css/Cart.css";
   import "./Cart.css"
  import {
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
+
+ 
     Button,
-    MenuGroup,
-    MenuDivider,
-    IconButton,
+   
     Flex,
     Text,
     Input,
-    Show,
-    Image,
-    useDisclosure,
-    Drawer,
-    DrawerOverlay,
-    DrawerContent,
-    DrawerCloseButton,
-    DrawerHeader,
-    DrawerBody,
+  
     TableContainer,
     Table,
     Thead,
@@ -33,11 +21,13 @@
     Tbody,
   } from "@chakra-ui/react";
   import React, { useEffect, useRef, useState } from "react";
- import axios from "axios"
+
  import { BsCart2, BsFillPersonFill, BsShieldFillCheck } from "react-icons/bs";
  import { MdOutlinePayments } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { fetchAllProducts } from "../Redux/CartReducer/action";
+import { removeitem } from "../Redux/CartReducer/action";
+// import { updateData } from "../Redux/CartReducer/action";
 import { useDispatch, useSelector } from 'react-redux';
 import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDataFromCart } from "../Redux/CartReducer/action"
 
@@ -50,25 +40,13 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
      const [show, setShow] = useState(false);
      const [TotalSum, setTotalSum] = useState(0);
      const cartData = useSelector(state => state.cartReducer.cartData);
-    // const getData=async()=>{
-    //   let res = await fetch(`http://localhost:8080/cart`,{
-    //     method:"GET",
-    //     headers:{
-    //       "Authorization": `${localStorage.getItem("token")}`
-    //     }
-    //   })
-    //   res = await res.json()
-    //   console.log(res)
-    //   setCartData(res)
-    // }
-    
+  
     useEffect(() => {
       dispatch(fetchAllProducts());
       setCartData(cartData)
     }, []);
     
-    // const TotalPrice = () => {
-    // };
+    
     useEffect(() => {
       let sum = 0;
       cartData.forEach((item) => (sum += item.price * item.quantity));
@@ -77,75 +55,24 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
      
     }, [cartData,TotalSum]);
    
-    // const handleQuant=(id,num)=>{
-    // setQuantity(quantity+num)
-    //   let payload = {quantity}
-      
-    //   fetch(`http://localhost:8080/cart/update/${id}`,{
-    //       method:"PATCH",
-    //       body:JSON.stringify(payload),
-    //       headers:{
-    //         "Content-Type":"application/json",
-    //         "Authorization":`${localStorage.getItem("token")}`
-    //       }
-    //   })
-    //   .then((res)=>res.json())
-    //   .then((res)=>{
-    //     getData()
-    //     // setQuantity(1)
-    //   })
-    //   .catch((err)=>{
-    //     console.log(err)
-    //   })
-
-    //   //  setQuantity(1)
-    // }
+    
 
        
   
     
-      //   const removeitem=async(id)=>{
-      //     let res = await fetch(`http://localhost:8080/cart/delete/${id}`,{
-      //       method:"DELETE",
-      //     headers:{
-      //         "Authorization":`${localStorage.getItem("token")}`
-      //       }
-      //   })
+      
 
-      //   res = await res.json()
-      //   getData()
-      // }
+      const handleDel=(id)=>{
+        dispatch(removeitem(id))
+        dispatch(fetchAllProducts());
+    }
 
-
-   
+    // const handleupdate=(id,quan)=>{
+    //   dispatch(updateData(id,quan))
+    //   dispatch(fetchAllProducts());
+    // }
     
-      // const HandleQuantityChange = async(id,quan,num) => {
-      //   let x = quan+num
-      //   let res = await fetch(`http://localhost:8080/cart/update/${id}`,{
-      //     method:"PATCH",
-      //     body:JSON.stringify({
-      //       quantity:x
-      //     }),
-      //     headers:{
-      //       "Authorization":`${localStorage.getItem("token")}`
-      //     }
-      //   })
-
-      //   res = await res.json()
-
-
-      //   const newData = CartData.filter((item) => {
-      //     return item._id === id ? (item.quantity = item.quantity + num) : item;
-      //   });
-      //   setCartData(newData);
-      //   console.log(res)
-
-      //   //  getData()
-        
-      // };
-    
-      console.log(cartData)
-      console.log(TotalSum)
+      
     return(
         <div style={{marginTop:"40px"}}>
 <TableContainer p="20px">
@@ -185,11 +112,9 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
                             <Td fontSize={"20px"}>
                               <button
                                 className="add-reduce-btn"
-                                // onClick={() =>
-                                  
-                                //   HandleQuantityChange(item._id,item.quantity,-1)
-                                //   }
+                               
                                 onClick={ () => dispatch(decreaseCartQuantity(item._id))}
+                                // onClick={handleupdate(item._id,item.quantity)}
                                 disabled={item.quantity <= 1}
                               >
                                 -
@@ -204,6 +129,7 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
                                 //   )
                                 // }
                                 onClick={ () => dispatch(increaseCartQuantity(item._id)) }
+
                               >
                                 +
                               </button>
@@ -226,7 +152,8 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
                             color="red"
                             variant={"outline"}
                             // onClick={() => removeitem(item._id)}
-                            onClick={ () => dispatch(removeDataFromCart(item._id)) }
+                            // onClick={ () => dispatch(removeDataFromCart(item._id)) }
+                            onClick={()=>handleDel(item._id)} 
                           >
                             Remove Item
                           </Button>
@@ -290,3 +217,66 @@ import { decreaseCartQuantity, deleteAllFromCart, increaseCartQuantity, removeDa
 
 
  export default Cart
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ //   const removeitem=async(id)=>{
+      //     let res = await fetch(`http://localhost:8080/cart/delete/${id}`,{
+      //       method:"DELETE",
+      //     headers:{
+      //         "Authorization":`${localStorage.getItem("token")}`
+      //       }
+      //   })
+
+      //   res = await res.json()
+      //   getData()
+      // }
+
+
+   
+    
+      // const HandleQuantityChange = async(id,quan,num) => {
+      //   let x = quan+num
+      //   let res = await fetch(`http://localhost:8080/cart/update/${id}`,{
+      //     method:"PATCH",
+      //     body:JSON.stringify({
+      //       quantity:x
+      //     }),
+      //     headers:{
+      //       "Authorization":`${localStorage.getItem("token")}`
+      //     }
+      //   })
+
+      //   res = await res.json()
+
+
+      //   const newData = CartData.filter((item) => {
+      //     return item._id === id ? (item.quantity = item.quantity + num) : item;
+      //   });
+      //   setCartData(newData);
+      //   console.log(res)
+
+      //   //  getData()
+        
+      // };
