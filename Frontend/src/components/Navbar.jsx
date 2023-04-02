@@ -7,11 +7,19 @@ import { Link } from "react-router-dom";
 import Logout from "./Logout";
 
 const Navbar = () => {
-  const [token,setToken]=useState("")
-  let tokenData=localStorage.getItem("token")
+  //const [token,setToken]=useState(localStorage.getItem("token") || "")
+  const [token,setToken]=useState(false)
+  
   
   useEffect(()=>{
-    setToken(tokenData)
+    let tokenData=localStorage.getItem("token") || ""
+    if(tokenData){
+      setToken(true)
+    }
+
+  },[])
+
+  useEffect(()=>{
 
   },[token])
   return (
