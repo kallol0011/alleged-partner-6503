@@ -1,14 +1,14 @@
-> 💻 CLONE PROJECT NAME⭐ ====>>>> ✨AVIS RENTALS💫
+> 💻 CLONE PROJECT NAME⭐ ====>>>> ✨AMAZON.in💫
 <br>
 
 
 
  
-[![Backend Repo Link](https://github.com/kallol0011/alleged-partner-6503/edit/main)](https://github.com/shikhu51197/backendcruise)
+[![Backend Repo Link](https://img.shields.io/badge/Backend_Repo_Link-0A66C2?style=for-the-badge&logo=github&logoColor=#FF7139)](https://github.com/kallol0011/alleged-partner-6503/edit/main)
 
 
-[![Deployed App Vercel Link](https://frontend-six-wine-29.vercel.app/)](https://frontend-six-wine-29.vercel.app/)
-[![Deployed Admin Vercel Link](https://admin-eight-ecru.vercel.app/)  
+[![Deployed App Vercel Link](https://img.shields.io/badge/Deployed_App_Vercel_Link-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://cruiserental.vercel.app/)
+[![Deployed Admin Vercel Link](https://img.shields.io/badge/Deployed_Admin_Vercel_Link-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://admin-eight-ecru.vercel.app/)  
 
 ---
 
