@@ -16,3 +16,31 @@
 
 > Amazon is one of the world's largest online retailers, offering a wide range of products and services to millions of customers around the globe. 
 > Our Amazon clone is a platform that recreates the Amazon shopping experience using the React framework. Built by a team of 5 developers, we aimed to provide customers with a user-friendly interface and a wide selection of products at competitive prices. Our platform is inspired by the innovative spirit of Amazon and is dedicated to offering a seamless and enjoyable online shopping experience.
+
+
+<br/>
+
+---
+## 💫Tech-Stack->
+
+- #### For Frontend :-
+   - `HTML5`
+  - `CSS3`
+  - `JavaScript `
+   - `Redux`
+  - `ReactJS`
+   - `ES6 `
+
+- #### For Backend :-
+   - `NodeJS`
+   - `ExpressJS`
+   - `MongoDB `
+
+- #### For deploy database :- 
+   - `cyclic `
+
+- #### For Styling :-  
+   - `Chakra UI `
+
+- #### For live Project : -
+   - `Vercel`
