@@ -17,7 +17,7 @@ import {
   game,
   HomeData,
   todayDeal,
-} from "../components/data";
+} from "../components/Data";
 import Footer from "../components/Footer";
 
 import ImgSlider from "../components/ImageSlider";

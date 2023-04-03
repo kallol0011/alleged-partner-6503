@@ -145,9 +145,9 @@ const Navbar = () => {
           </Box></Link>
 
 
-          {/* <Box>
-            <a href="https://admin-eight-ecru.vercel.app/">Admin</a>
-          </Box> */}
+          <Box>
+            <a href="https://admin-eight-ecru.vercel.app/"><span style={{fontWeight:"bold"}}>Admin</span></a>
+          </Box>
 
            
 
