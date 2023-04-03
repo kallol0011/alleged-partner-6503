@@ -143,7 +143,14 @@ const Navbar = () => {
             <Icon fontSize={"4xl"} as={FaShoppingCart}/>
             Cart
           </Box>
+
+          <Box>
+            <a href="https://admin-eight-ecru.vercel.app/">Admin</a>
+          </Box>
         </Box>
+
+      
+       
 {/* /////////////////////////////////////////////////////////////////////////////// */}
        <Box pos={"relative"} zIndex='1200'>
        <nav className="nav" >
