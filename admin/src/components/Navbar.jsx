@@ -28,6 +28,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 import LOGO from "../Images/newLOGO.jpg"
+import amazon_logo from "../Images/Amazon_logo.png" 
 
 
 
@@ -69,7 +70,7 @@ const Navbar = () => {
          {/* <Link to="/admin/dashboard" >   */}
           <img
               className="logo"
-             src={LOGO} 
+             src={amazon_logo} 
 
             alt="logo"
             />

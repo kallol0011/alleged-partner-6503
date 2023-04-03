@@ -68,7 +68,7 @@ const elments = [
     
     console.log(data);
     
-    fetch(`http://localhost:8080/admin/add`,{   ///page/${page}?category=${catagory}
+    fetch(`https://strange-crown-worm.cyclic.app/admin/add`,{   ///page/${page}?category=${catagory}
       
       method:"POST",
       headers:{

@@ -3,6 +3,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import Sidebar from '../components/Sidebar';
 import Loader from '../components/Loader';
 import "../Styles/Users.css"
+import { Helmet } from 'react-helmet';
 import {
   
   Text,
@@ -18,7 +19,7 @@ import {
 
 const getData=()=>{
   
-  return fetch(`http://localhost:8080/admin/getuser`,{
+  return fetch(`https://strange-crown-worm.cyclic.app/admin/getuser`,{
     method:"GET",
     headers:{
       "Content-Type":"application/json",
@@ -44,7 +45,9 @@ console.log(data)
 
     return (
       <Flex marginTop="60px" className='mainbox' >
-            
+            <Helmet>
+        <title> Users </title>
+      </Helmet>
       <Box>
         <Sidebar />
       </Box>

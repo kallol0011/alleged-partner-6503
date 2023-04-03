@@ -29,7 +29,7 @@ const navigate=useNavigate()
           console.log(data)
 
 
-    fetch(`http://localhost:8080/user/register`,{
+    fetch(`https://strange-crown-worm.cyclic.app/user/register`,{
       method:"POST",
       headers:{
           "Content-Type":"application/json"

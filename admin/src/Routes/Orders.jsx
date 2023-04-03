@@ -5,14 +5,14 @@ import Loader from '../components/Loader';
 import "../Styles/Order.css"
 import { MdDeleteForever } from 'react-icons/md';
 import { AiFillCheckCircle } from 'react-icons/ai';
-
+import { Helmet } from 'react-helmet';
 
 
 
 
 
 const getData=()=>{
-  return fetch(`http://localhost:8080/admin/getorder`,{
+  return fetch(`https://strange-crown-worm.cyclic.app/admin/getorder`,{
     method:"GET",
     headers:{
       "Content-Type":"application/json",
@@ -62,7 +62,7 @@ const OrderDone=()=>{
 const deleteProduct=(id)=>{
   // 
   console.log(id)
-  fetch(`http://localhost:8080/admin/deleteorder/${id}`,{
+  fetch(`https://strange-crown-worm.cyclic.app/admin/deleteorder/${id}`,{
     method:"DELETE",
     headers:{
       "Content-Type":"application/json",
@@ -87,7 +87,9 @@ const deleteProduct=(id)=>{
 
     return (
       <Flex marginTop="60px" className='mainbox' >
-            
+            <Helmet>
+        <title> Orders </title>
+      </Helmet>
       <Box>
         <Sidebar />
       </Box>

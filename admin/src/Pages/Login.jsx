@@ -4,6 +4,9 @@ import Sidebar from '../components/Sidebar';
 import Loader from '../components/Loader';
 import amazon_logo from "../Images/Amazon_logo.png" 
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
+
 
 const Login = () => {
     const [loading,setLoading]=useState(false)
@@ -28,7 +31,7 @@ const Login = () => {
  
           console.log(data)
 
-          fetch(`http://localhost:8080/user/login`,{
+          fetch(`https://strange-crown-worm.cyclic.app/user/login`,{
       
       method:"POST",
       headers:{
@@ -69,6 +72,9 @@ const Login = () => {
 
       <Flex marginTop={"60px"} className="mainbox" h={"91.5vh"} bg={"yellow.400"} >
             
+            <Helmet>
+        <title> Login </title>
+      </Helmet>
             
             <Box overflow={"auto"} width="90%"> 
               {loading ? (

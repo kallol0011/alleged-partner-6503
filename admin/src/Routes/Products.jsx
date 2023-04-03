@@ -25,10 +25,14 @@ import { BiSort } from "react-icons/bi";
 import { RxDotFilled } from "react-icons/rx";
 import Loader from '../components/Loader';
 import { Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
+
+const baseUrl=`https://strange-crown-worm.cyclic.app`
 
 const getData=(page,catagory)=>{
   // if(payload!==""){
-    return fetch(`http://localhost:8080/admin/page/${page}?category=${catagory}`,{  //page/${page}?category=${catagory}
+    return fetch(`https://strange-crown-worm.cyclic.app/admin/page/${page}?category=${catagory}`,{  //page/${page}?category=${catagory}
     method:"GET",
     headers:{
       "Content-Type":"application/json",
@@ -39,18 +43,6 @@ const getData=(page,catagory)=>{
   .then((res)=>res.json())
 
   
-
-  // }else{
-  //   return fetch(`http://localhost:8080/admin`,{
-  //     method:"GET",
-  //     headers:{
-  //       "Content-Type":"application/json",
-  //       "Authorization":localStorage.getItem("token")
-  //     }
-  
-  //   })
-  //   .then((res)=>res.json())
-  // }
    
   
 }
@@ -84,7 +76,7 @@ const Products = () => {
       // 
       setdlt(Math.random())
       console.log(id)
-      fetch(`http://localhost:8080/admin/delete/${id}`,{
+      fetch(`https://strange-crown-worm.cyclic.app/admin/delete/${id}`,{
         method:"DELETE",
         headers:{
           "Content-Type":"application/json",
@@ -120,6 +112,9 @@ const Products = () => {
 
     return (
         <Flex marginTop={"60px"} className="mainbox" >
+          <Helmet>
+        <title> Products </title>
+      </Helmet>
       <Box   >
         <Sidebar />
       </Box>
@@ -185,7 +180,7 @@ const Products = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                {
+                { product &&
                   product?.map((el) => {
                     return (
                       

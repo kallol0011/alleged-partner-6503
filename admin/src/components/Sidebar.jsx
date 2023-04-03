@@ -17,7 +17,8 @@ const Sidebar = () => {
   
   const LogOut=()=>{
     localStorage.removeItem("token")
-    navigate("/admin/login")
+    
+    navigate("/")
   }
     return (
       <>
