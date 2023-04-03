@@ -12,6 +12,6 @@
 
 ---
 
- ![ShopGIF](https://media.giphy.com/media/IzoWwMyCtNyNwuLRWS/giphy.gif) 
+ ![ShopGIF](https://media3.giphy.com/media/zWyv9xtsEfXQQ/200w.webp?cid=ecf05e47glau5ty091bopphtyc6b6oa3234hbmyd3uxuop26&rid=200w.webp&ct=g) 
 
 > Avis is India's leading mobility Company with services ranging from chauffeur drive and self-drive car rentals, car-Sales, operating lease and fleet management and has been present in the country for over 20 years.This was a collaborative Project which is made by 5 team members within 5 Days.
